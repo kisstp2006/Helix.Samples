@@ -1,0 +1,80 @@
+/* The page's styles: change a value and save, the sample shows it within a second. */
+
+#page {
+    --panel: #1e222b;
+    --raised: #2a303c;
+    --line: #3a4252;
+    --accent: #4f9dff;
+    --warm: #ff8a4c;
+    --cool: #3fd0a8;
+    flex-grow: 1;
+    padding: 16px;
+}
+
+/* The header and the footer: rows of fixed height. */
+.bar {
+    flex-direction: row;
+    align-items: center;
+    height: 56px;
+    flex-shrink: 0;
+    padding: 0px 16px;
+    background-color: var(--panel);
+    border-width: 1px;
+    border-color: #3a4252;
+}
+
+.logo { width: 36px; height: 36px; background-color: var(--accent); }
+.spacer { flex-grow: 1; }
+.pill { width: 72px; height: 24px; margin-left: 8px; background-color: var(--raised); border-width: 1px; border-color: #4a5468; }
+.pill.accent { background-color: var(--accent); border-color: #8fc1ff; }
+
+/* The body: the sidebar beside the content, which takes the rest. */
+#body {
+    flex-direction: row;
+    flex-grow: 1;
+    margin: 16px 0px;
+}
+
+#sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    padding: 12px;
+    background-color: var(--panel);
+    border-width: 1px;
+    border-color: #3a4252;
+}
+
+.item { height: 32px; margin-bottom: 8px; background-color: var(--raised); }
+.item.selected { background-color: var(--accent); border-width: 0px 0px 0px 4px; border-color: #ffffff; }
+.item.muted { opacity: 0.4; }
+
+/* The content: cards in rows that wrap, spaced evenly. */
+#content {
+    flex-grow: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-between;
+    margin-left: 16px;
+}
+
+.card {
+    width: 150px;
+    margin-bottom: 16px;
+    padding: 10px;
+    background-color: var(--raised);
+    border-width: 1px;
+    border-color: #3a4252;
+}
+
+.picture { aspect-ratio: 2; background-color: var(--accent); margin-bottom: 10px; }
+.line { height: 8px; margin-top: 6px; background-color: #8892a6; }
+.line.short { width: 60%; }
+
+.warm .picture { background-color: var(--warm); }
+.cool .picture { background-color: var(--cool); }
+.wide .card { width: 316px; }
+
+/* A progress bar: the fill is a share of the track. */
+.track { flex-grow: 1; height: 12px; background-color: #12151b; border-width: 1px; border-color: #3a4252; }
+.fill { width: 65%; height: 100%; background-color: var(--cool); }

@@ -1,0 +1,37 @@
+<HXML>
+  <!-- A page of the layout and the styles: edit this file or UILayout.hss while the sample runs. -->
+  <Style src="UILayout.hss"/>
+  <Template name="Card" src="Card.hxml"/>
+  <Element name="page">
+    <Element name="header" class="bar">
+      <Element class="logo"/>
+      <Element class="spacer"/>
+      <Element class="pill"/>
+      <Element class="pill accent"/>
+      <Element class="pill"/>
+    </Element>
+    <Element name="body">
+      <Element name="sidebar">
+        <Element class="item selected"/>
+        <Element class="item"/>
+        <Element class="item"/>
+        <Element class="item"/>
+        <Element class="item muted"/>
+      </Element>
+      <Element name="content">
+        <Instance template="Card"/>
+        <Instance template="Card" class="warm"/>
+        <Instance template="Card"/>
+        <Instance template="Card" class="cool"/>
+        <Instance template="Card" class="wide"/>
+        <Instance template="Card"/>
+        <Instance template="Card" class="warm"/>
+      </Element>
+    </Element>
+    <Element name="footer" class="bar">
+      <Element class="track">
+        <Element class="fill"/>
+      </Element>
+    </Element>
+  </Element>
+</HXML>

@@ -1,0 +1,8 @@
+<HXML>
+  <!-- A card: a picture and two lines (text comes later). -->
+  <Element class="card">
+    <Element class="picture"/>
+    <Element class="line"/>
+    <Element class="line short"/>
+  </Element>
+</HXML>

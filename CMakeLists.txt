@@ -1,0 +1,59 @@
+cmake_minimum_required(VERSION 3.28)
+project(Helix.Samples LANGUAGES CXX)
+
+if(NOT COMMAND helix_add_library)
+    include("${CMAKE_CURRENT_SOURCE_DIR}/External/Helix.CMake/Helix.cmake")
+endif()
+
+# The samples: data folders under Samples/<name>/Data run by the launcher HelixSamples, the player with both render
+# pipelines and the UI linked in (-pipeline standard|physical, -sample <name>). Desktop only: the Web and Android get
+# data folders with the build pipeline.
+helix_require(Core)
+helix_require(Engine)
+helix_require(RenderPipelines.Standard)
+helix_require(RenderPipelines.Physical)
+helix_require(UI)
+helix_require(Player)
+
+if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
+    helix_collect_sources(launcher_sources "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix")
+    file(GLOB_RECURSE launcher_headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/*.h")
+    helix_add_executable(helix_samples SOURCES ${launcher_sources} ${launcher_headers}
+                         DEPS Helix::PlayerCore Helix::RenderPipelines.Standard Helix::RenderPipelines.Physical Helix::UIEngine)
+    set_target_properties(helix_samples PROPERTIES OUTPUT_NAME HelixSamples RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+    target_include_directories(helix_samples PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source")
+    # The samples' data folders are read where they are, so an edit of a sample's files shows while it runs.
+    target_compile_definitions(helix_samples PRIVATE "HELIX_SAMPLES_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/Samples\"")
+
+    # The shader assemblies beside the launcher: the core's library and shaders, both pipelines', the UI's.
+    set(shaders_out "${CMAKE_BINARY_DIR}/Shaders")
+    set(shader_assemblies "${HELIX_RENDER_PIPELINES_CORE_SHADER_LIBRARY}" "${HELIX_RENDER_PIPELINES_CORE_SHADERS}"
+        "${HELIX_RENDER_PIPELINES_STANDARD_SHADERS}" "${HELIX_RENDER_PIPELINES_PHYSICAL_SHADERS}" "${HELIX_UI_SHADERS}")
+    add_custom_command(
+        OUTPUT "${shaders_out}/.staged"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory "${shaders_out}"
+        COMMAND "${CMAKE_COMMAND}" -E copy ${shader_assemblies} "${shaders_out}"
+        COMMAND "${CMAKE_COMMAND}" -E touch "${shaders_out}/.staged"
+        DEPENDS ${shader_assemblies}
+        COMMENT "Staging the samples' shader assemblies")
+    add_custom_target(helix_samples_shaders ALL DEPENDS "${shaders_out}/.staged")
+    add_dependencies(helix_samples_shaders helix_render_pipelines_core_shaders helix_render_pipelines_standard_shaders
+                     helix_render_pipelines_physical_shaders helix_ui_shaders)
+    add_dependencies(helix_samples helix_samples_shaders)
+
+    # The golden images: each sample on each pipeline in batch mode, its screenshot against Tests/Golden.
+    if(HELIX_BUILD_TESTS AND PROJECT_IS_TOP_LEVEL)
+        helix_add_executable(helix_samples_compare SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/Tools/CompareImages/CompareImages.cpp" DEPS Helix::Image Helix::Platform)
+        set_target_properties(helix_samples_compare PROPERTIES OUTPUT_NAME CompareImages)
+        set(runner "${CMAKE_CURRENT_SOURCE_DIR}/Tests/RunSample.cmake")
+        foreach(sample IN ITEMS UILayout)
+            foreach(pipeline IN ITEMS standard physical)
+                add_test(NAME helix_samples_${sample}_${pipeline}
+                         COMMAND "${CMAKE_COMMAND}" "-DLAUNCHER=$<TARGET_FILE:helix_samples>" "-DCOMPARE=$<TARGET_FILE:helix_samples_compare>"
+                                 "-DSAMPLE=${sample}" "-DPIPELINE=${pipeline}"
+                                 "-DGOLDEN=${CMAKE_CURRENT_SOURCE_DIR}/Tests/Golden/${sample}-${pipeline}.png"
+                                 "-DOUT=${CMAKE_CURRENT_BINARY_DIR}/shots/${sample}-${pipeline}.png" -P "${runner}")
+            endforeach()
+        endforeach()
+    endif()
+endif()
