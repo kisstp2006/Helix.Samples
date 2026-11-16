@@ -1,0 +1,119 @@
+/* The rendering sample's styles: change a value and save, the sample shows it within a second. */
+
+#page {
+    --panel: #1e222b;
+    --raised: #2a303c;
+    --line: #3a4252;
+    --text: #e6e9ef;
+    --muted: #8892a6;
+    --accent: #4f9dff;
+    --warm: #ff8a4c;
+    --cool: #3fd0a8;
+    --gold: #ffd54a;
+    flex-grow: 1;
+    padding: 16px;
+    color: var(--text);
+    font-size: 15px;
+}
+
+#title { font-size: 30px; -helix-font-style: bold; color: var(--accent); margin-bottom: 10px; }
+
+.row { flex-direction: row; flex-grow: 1; flex-basis: 0px; margin-bottom: 12px; }
+
+.card {
+    flex-grow: 1;
+    flex-basis: 0px;
+    margin-right: 12px;
+    padding: 12px;
+    background-color: var(--panel);
+    border-width: 1px;
+    border-color: #3a4252;
+    border-radius: 14px;
+}
+
+.card.wide { flex-grow: 1.5; }
+.card.narrow { flex-grow: 0.8; }
+
+.caption { color: var(--muted); font-size: 13px; -helix-font-style: bold; margin-bottom: 8px; }
+
+.swatches { flex-direction: row; align-items: center; margin-bottom: 10px; }
+
+/* Shapes. */
+.swatch { width: 48px; height: 48px; margin-right: 10px; flex-shrink: 0; }
+.rounded { background-color: var(--accent); border-radius: 14px; }
+.circle { background-color: var(--warm); border-radius: 50%; border-width: 3px; border-color: #ffffff; }
+.sides {
+    background-color: var(--raised);
+    border-radius: 12px;
+    border-left-width: 3px; border-top-width: 8px; border-right-width: 3px; border-bottom-width: 8px;
+    border-left-color: var(--accent); border-top-color: var(--cool); border-right-color: var(--warm); border-bottom-color: var(--gold);
+}
+.leaf { background-color: var(--cool); border-top-left-radius: 28px; border-bottom-right-radius: 28px; }
+.faded { background-color: #ffffff; border-radius: 8px; opacity: 0.35; }
+
+.pill { height: 32px; padding: 0px 18px; margin-right: 10px; justify-content: center; border-radius: 16px; background-color: var(--accent); }
+.pill.outline { background-color: rgba(0, 0, 0, 0); border-width: 2px; border-color: #4f9dff; }
+.pill-text { font-size: 14px; -helix-font-style: bold; }
+
+/* Images: the sample's own (Images/) beside CC0 art (Images/CC0/, see CREDITS.txt). */
+.photo {
+    flex-shrink: 0; width: 76px; height: 46px; margin-right: 8px;
+    background-color: var(--raised); background-image: url("../Images/Landscape.png");
+}
+.photo.alps { background-image: url("../Images/CC0/PolyHavenAlpsField.png"); }
+.photo.stretch { -helix-background-scale-mode: stretch-to-fill; width: 46px; }
+.photo.crop { -helix-background-scale-mode: scale-and-crop; border-radius: 10px; width: 52px; }
+.photo.fit { -helix-background-scale-mode: scale-to-fit; border-radius: 6px; }
+.avatar {
+    flex-shrink: 0; width: 46px; height: 46px;
+    background-image: url("../Images/Avatar.png"); -helix-background-scale-mode: scale-and-crop;
+    border-radius: 50%; border-width: 3px; border-color: #4f9dff;
+}
+.animal { flex-shrink: 0; width: 56px; height: 46px; margin-right: 6px; -helix-background-scale-mode: scale-to-fit; }
+.animal.panda { background-image: url("../Images/CC0/KenneyPanda.png"); }
+.animal.penguin { background-image: url("../Images/CC0/KenneyPenguin.png"); }
+.star { flex-shrink: 0; width: 30px; height: 30px; margin-right: 8px; background-image: url("../Images/Star.png"); }
+.star.icon { background-image: url("../Images/CC0/KenneyIconStar.png"); }
+.star.kenney { background-image: url("../Images/CC0/KenneyStar.png"); -helix-background-scale-mode: scale-to-fit; }
+.star.gold { -helix-background-image-tint-color: var(--gold); }
+.star.blue { -helix-background-image-tint-color: var(--accent); }
+.star.green { -helix-background-image-tint-color: var(--cool); }
+
+/* 9-slice: the corners keep their size, the edges and the middle stretch. */
+.button {
+    flex-shrink: 0; margin-right: 10px; margin-bottom: 8px; justify-content: center; align-items: center;
+    background-image: url("../Images/Frame.png");
+    -helix-slice-left: 16; -helix-slice-top: 16; -helix-slice-right: 16; -helix-slice-bottom: 16;
+}
+.button.wide { height: 40px; }
+.button.kenney { height: 40px; -helix-slice-left: 12; -helix-slice-top: 12; -helix-slice-right: 12; -helix-slice-bottom: 16; }
+.button.kenney.blue { background-image: url("../Images/CC0/KenneyButtonBlue.png"); }
+.button.kenney.green { background-image: url("../Images/CC0/KenneyButtonGreen.png"); }
+.button.small-button { width: 64px; }
+.button.kenney-panel {
+    width: 48px; height: 56px; background-image: url("../Images/CC0/KenneyPanel.png");
+    -helix-slice-left: 10; -helix-slice-top: 10; -helix-slice-right: 10; -helix-slice-bottom: 14;
+}
+.button.small { width: 24px; height: 24px; }
+.button.half { width: 40px; height: 32px; -helix-slice-scale: 0.5; }
+.button-text { font-size: 16px; -helix-font-style: bold; }
+
+/* Clipping: the list is larger than its viewport, which cuts it to its rounded box. */
+.viewport {
+    width: 100px; height: 120px; margin-right: 14px; overflow: hidden; flex-shrink: 0;
+    border-radius: 18px; border-width: 2px; border-color: #4f9dff; background-color: var(--raised);
+}
+.list { position: absolute; left: -6px; top: -14px; width: 120px; }
+.item { height: 28px; padding: 5px 14px; background-color: #34405a; }
+.item.odd { background-color: #283044; }
+.lens { flex-shrink: 0; width: 80px; height: 80px; overflow: hidden; border-radius: 50%; border-width: 3px; border-color: #ffd54a; }
+.lens-image {
+    position: absolute; left: -60px; top: -20px; width: 192px; height: 112px;
+    background-image: url("../Images/Landscape.png");
+}
+
+/* Painted charts. */
+.chart { flex-grow: 1; }
+.charts { flex-direction: row; flex-grow: 1; }
+.charts .chart { flex-basis: 0px; margin-right: 8px; }
+.chart.donut { flex-grow: 0.8; }

@@ -1,0 +1,17 @@
+The images of UIRender
+
+Data/Images/*.png are the sample's own, drawn by Tools/GenerateData.py.
+
+Data/Images/CC0/ holds art released under Creative Commons Zero (CC0 1.0, public domain dedication,
+https://creativecommons.org/publicdomain/zero/1.0/), put there by Tools/PrepareImages.py:
+
+  KenneyButtonBlue.png, KenneyButtonGreen.png, KenneyPanel.png, KenneyStar.png
+      UI Pack 2.0 by Kenney (www.kenney.nl), https://opengameart.org/content/ui-pack (kenney_ui-pack.zip)
+  KenneyIconStar.png
+      Game icons by Kenney (www.kenney.nl), https://opengameart.org/content/game-icons (Kenney_gameIcons.zip)
+  KenneyPanda.png, KenneyPenguin.png
+      Animal Pack Redux by Kenney (www.kenney.nl), https://opengameart.org/content/animal-pack-redux
+      (kenney_animalPackRedux.zip)
+  PolyHavenAlpsField.png
+      The preview of the HDRI Alps Field, Poly Haven, https://polyhaven.com/a/alps_field
+      (https://cdn.polyhaven.com/asset_img/primary/alps_field.png?height=256&format=png), halved to 256 by 128

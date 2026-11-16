@@ -1,0 +1,17 @@
+# The sample's data folder: every file, its guid and its path (Tools/GenerateData.py).
+8a6983ca5befe0a426e10ece025653db Images/Avatar.png
+7f075e0ac6f7981c058dcc08af21b561 Images/CC0/KenneyButtonBlue.png
+c01e6044d692fc609eb21c0147bf9934 Images/CC0/KenneyButtonGreen.png
+beeb4fc5fe8ed3981fc42a00f85fe1dd Images/CC0/KenneyIconStar.png
+f9ff4f48463b6917ba6b2278f457e6b2 Images/CC0/KenneyPanda.png
+c75fb37d6a6c0cf6ef0f15de5b99d369 Images/CC0/KenneyPanel.png
+c8bc8300b7f26a5e5d4c581759f1023f Images/CC0/KenneyPenguin.png
+1744d106d490ff5f82cf733d1d2390d3 Images/CC0/KenneyStar.png
+2d13baffb254aa21dfd2c3d349b78d78 Images/CC0/PolyHavenAlpsField.png
+906a2fb2e62ece24a45ac336b04ed21b Images/Frame.png
+e8ae731a535871bceb48802a140bc82a Images/Landscape.png
+c525d464239c147f5e234c664254ef54 Images/Star.png
+49606ecee4ffc212e2e205516a08b757 Scenes/UIRender.helix
+97da72473783e29e8646dab7511135a9 Scripts/UIView.asset
+dae338645662b9142e259facf3ac1154 UI/UIRender.hss
+c58081b942d17854ff3afbd6c3bfc9f7 UI/UIRender.hxml

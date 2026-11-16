@@ -11,13 +11,15 @@ namespace helix::engine
 
 // The samples' launcher: the player with the render pipelines and the UI linked in. It takes the player's command line
 // and its own arguments:
-//   -pipeline <name>  the pipeline that renders (standard, physical; standard by default)
+//   -pipeline <name>  the pipeline that renders (standard, physical, or none for the engine's own drawing; standard by
+//                     default)
 //   -sample <name>    the sample whose data folder runs (Samples/<name>/Data of the repo; UILayout by default)
 // The shader assemblies of the pipelines and the UI are an asset folder beside the executable (Shaders/).
 namespace helix::samples
 {
     // A pipeline the launcher can render with: its name on the command line, its game module, and how its asset is made
-    // (as the editor makes a new one: the Standard asset with its default renderer).
+    // (as the editor makes a new one: the Standard asset with its default renderer). The entry without a module and an
+    // asset renders with no pipeline set.
     struct PipelineEntry
     {
         StringView name;

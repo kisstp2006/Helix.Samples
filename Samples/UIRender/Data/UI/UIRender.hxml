@@ -1,0 +1,87 @@
+<HXML>
+  <!-- Rendering: edit this file or UIRender.hss while the sample runs. The images are drawn by Tools/GenerateData.py;
+       the charts are the launcher's SampleChart element, painted with vector paths. -->
+  <Style src="UIRender.hss"/>
+  <Element name="page">
+    <Label name="title" text="Helix UI rendering"/>
+    <Element class="row">
+      <Element class="card">
+        <Label class="caption" text="Rounded boxes and borders"/>
+        <Element class="swatches">
+          <Element class="swatch rounded"/>
+          <Element class="swatch circle"/>
+          <Element class="swatch sides"/>
+          <Element class="swatch leaf"/>
+          <Element class="swatch faded"/>
+        </Element>
+        <Element class="swatches">
+          <Element class="pill"><Label class="pill-text" text="Pill"/></Element>
+          <Element class="pill outline"><Label class="pill-text" text="Outline"/></Element>
+        </Element>
+      </Element>
+      <Element class="card">
+        <Label class="caption" text="Images: own and CC0 (Kenney, Poly Haven)"/>
+        <Element class="swatches">
+          <Element class="photo stretch"/>
+          <Element class="photo crop"/>
+          <Element class="photo fit"/>
+          <Element class="avatar"/>
+        </Element>
+        <Element class="swatches">
+          <Element class="photo alps crop"/>
+          <Element class="photo alps fit"/>
+          <Element class="animal panda"/>
+          <Element class="animal penguin"/>
+        </Element>
+        <Element class="swatches">
+          <Element class="star gold"/>
+          <Element class="star blue"/>
+          <Element class="star green"/>
+          <Element class="star icon gold"/>
+          <Element class="star icon blue"/>
+          <Element class="star kenney"/>
+        </Element>
+      </Element>
+      <Element class="card narrow">
+        <Label class="caption" text="9-slice"/>
+        <Element class="button wide"><Label class="button-text" text="Play"/></Element>
+        <Element class="button kenney blue"><Label class="button-text" text="Start"/></Element>
+        <Element class="swatches">
+          <Element class="button kenney green small-button"><Label class="button-text" text="OK"/></Element>
+          <Element class="button kenney-panel"/>
+          <Element class="button small"/>
+          <Element class="button half"/>
+        </Element>
+      </Element>
+    </Element>
+    <Element class="row">
+      <Element class="card narrow">
+        <Label class="caption" text="Clipping"/>
+        <Element class="swatches">
+          <Element class="viewport">
+            <Element class="list">
+              <Label class="item" text="Item 1"/>
+              <Label class="item odd" text="Item 2"/>
+              <Label class="item" text="Item 3"/>
+              <Label class="item odd" text="Item 4"/>
+              <Label class="item" text="Item 5"/>
+              <Label class="item odd" text="Item 6"/>
+            </Element>
+          </Element>
+          <Element class="lens"><Element class="lens-image"/></Element>
+        </Element>
+      </Element>
+      <Element class="card wide">
+        <Label class="caption" text="Painter: a line with a gradient"/>
+        <SampleChart class="chart" kind="line" values="12 18 9 22 28 19 32 26 38 34" colors="#4f9dff #ff8a4c"/>
+      </Element>
+      <Element class="card">
+        <Label class="caption" text="Painter: bars and a donut"/>
+        <Element class="charts">
+          <SampleChart class="chart" kind="bars" values="5 9 4 12 7 10"/>
+          <SampleChart class="chart donut" kind="donut" values="40 25 20 15"/>
+        </Element>
+      </Element>
+    </Element>
+  </Element>
+</HXML>

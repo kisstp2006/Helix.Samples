@@ -6,7 +6,7 @@ if(NOT COMMAND helix_add_library)
 endif()
 
 # The samples: data folders under Samples/<name>/Data run by the launcher HelixSamples, the player with both render
-# pipelines and the UI linked in (-pipeline standard|physical, -sample <name>). Desktop only: the Web and Android get
+# pipelines and the UI linked in (-pipeline standard|physical|none, -sample <name>). Desktop only: the Web and Android get
 # data folders with the build pipeline.
 helix_require(Core)
 helix_require(Engine)
@@ -48,12 +48,13 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         set(runner "${CMAKE_CURRENT_SOURCE_DIR}/Tests/RunSample.cmake")
         # Samples drawn with the machine's fonts (MACHINE_FONTS) run everywhere but compare their screenshots only
         # where the goldens were made (not on CI, whose fonts differ).
-        foreach(sample IN ITEMS UILayout UIText)
+        set(machine_font_samples UIText UIRender)
+        foreach(sample IN ITEMS UILayout UIText UIRender)
             set(machine_fonts 0)
-            if(sample STREQUAL "UIText")
+            if(sample IN_LIST machine_font_samples)
                 set(machine_fonts 1)
             endif()
-            foreach(pipeline IN ITEMS standard physical)
+            foreach(pipeline IN ITEMS standard physical none)
                 add_test(NAME helix_samples_${sample}_${pipeline}
                          COMMAND "${CMAKE_COMMAND}" "-DLAUNCHER=$<TARGET_FILE:helix_samples>" "-DCOMPARE=$<TARGET_FILE:helix_samples_compare>"
                                  "-DSAMPLE=${sample}" "-DPIPELINE=${pipeline}" "-DMACHINE_FONTS=${machine_fonts}"

@@ -1,5 +1,7 @@
 #include <Helix/Samples/Launcher/Launcher.h>
 
+#include <Helix/Samples/Charts/Chart.h>
+
 #include <Helix/Core/Logging/Log.h>
 #include <Helix/Core/Strings/Format.h>
 #include <Helix/Engine/Asset/Asset.h>
@@ -29,6 +31,7 @@ namespace helix::samples
         constexpr PipelineEntry kPipelines[] = {
             {"standard", "HelixRenderPipelinesStandard", &HxBindings_HelixRenderPipelinesStandard_Publish, &CreateStandard},
             {"physical", "HelixRenderPipelinesPhysical", &HxBindings_HelixRenderPipelinesPhysical_Publish, &CreatePhysical},
+            {"none", "", nullptr, nullptr},
         };
 
         // The modules every sample has beside the pipelines.
@@ -157,9 +160,11 @@ namespace helix::samples
         for (const ModuleEntry& m : kModules)
             registered = Register(m.name, m.publish) && registered;
         for (const PipelineEntry& p : Pipelines())
-            registered = Register(p.module, p.publish) && registered;
+            if (p.publish)
+                registered = Register(p.module, p.publish) && registered;
         if (!registered)
             return 1;
+        RegisterSampleChart();
 
         Run run;
         if (!run.player.Start(options))
@@ -169,12 +174,15 @@ namespace helix::samples
             return code;
         }
         engine::FolderAssetSource* shaders = LoadShaders();
-        engine::ScriptableObject* asset = pipeline->createAsset();
+        engine::ScriptableObject* asset = pipeline->createAsset ? pipeline->createAsset() : nullptr;
+        bool made = asset || !pipeline->createAsset;
         if (asset)
         {
             engine::GraphicsSettings::SetDefaultRenderPipeline(asset);
             HX_LOG_INFO(SamplesLog, "Sample {} on the {} pipeline.", launcher.sample.View(), pipeline->name);
         }
+        else if (made)
+            HX_LOG_INFO(SamplesLog, "Sample {} without a render pipeline.", launcher.sample.View());
         else
             HX_LOG_ERROR(SamplesLog, "The {} pipeline's asset could not be made.", pipeline->name);
         platform::RunMainLoop(&RunFrame, &run);
@@ -182,6 +190,6 @@ namespace helix::samples
         engine::GraphicsSettings::SetDefaultRenderPipeline(nullptr);
         run.player.Shutdown();
         delete shaders;
-        return asset && shaders ? code : 1;
+        return made && shaders ? code : 1;
     }
 }
