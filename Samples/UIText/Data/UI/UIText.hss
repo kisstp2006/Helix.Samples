@@ -1,0 +1,36 @@
+/* The text sample's styles: change a value and save, the sample shows it within a second. */
+
+#page {
+    --panel: #1e222b;
+    --line: #3a4252;
+    --text: #e6e9ef;
+    --muted: #8892a6;
+    --accent: #4f9dff;
+    flex-grow: 1;
+    padding: 16px;
+    color: var(--text);
+    font-size: 16px;
+}
+
+#title { font-size: 32px; -helix-font-style: bold; color: var(--accent); margin-bottom: 12px; }
+
+.row { flex-direction: row; flex-grow: 1; margin-bottom: 12px; }
+
+.card {
+    flex-grow: 1;
+    flex-basis: 0px;
+    margin-right: 12px;
+    padding: 12px;
+    background-color: var(--panel);
+    border-width: 1px;
+    border-color: #3a4252;
+}
+
+.card.wide { flex-grow: 1.4; }
+.card.narrow { flex-grow: 0.8; }
+
+.caption { color: var(--muted); font-size: 13px; -helix-font-style: bold; margin-bottom: 6px; }
+.body { margin-bottom: 8px; }
+.rtl { -helix-text-align: upper-right; }
+.large { font-size: 22px; }
+.cut { white-space: nowrap; text-overflow: ellipsis; }

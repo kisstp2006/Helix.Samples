@@ -1,0 +1,34 @@
+<HXML>
+  <!-- Text: edit this file or UIText.hss while the sample runs. Characters beyond ASCII are written as
+       character references, rich text tags as &lt;b&gt; (both are XML). -->
+  <Style src="UIText.hss"/>
+  <Element name="page">
+    <Label name="title" text="Helix text"/>
+    <Element class="row">
+      <Element class="card wide">
+        <Label class="caption" text="Rich text"/>
+        <Label class="body">Text can be &lt;b&gt;bold&lt;/b&gt;, &lt;i&gt;italic&lt;/i&gt;, &lt;u&gt;underlined&lt;/u&gt;, &lt;s&gt;struck&lt;/s&gt; and &lt;mark=#ffd54a60&gt;marked&lt;/mark&gt;; &lt;color=#4f9dff&gt;colored&lt;/color&gt;, &lt;size=24&gt;larger&lt;/size&gt; or &lt;size=12&gt;smaller&lt;/size&gt;; E = mc&lt;sup&gt;2&lt;/sup&gt;, H&lt;sub&gt;2&lt;/sub&gt;O; &lt;smallcaps&gt;Small Caps&lt;/smallcaps&gt;, &lt;cspace=3&gt;spaced&lt;/cspace&gt;.</Label>
+      </Element>
+      <Element class="card">
+        <Label class="caption" text="Bidirectional"/>
+        <Label class="body">Helix draws &#x5E9;&#x5DC;&#x5D5;&#x5DD; &#x5E2;&#x5D5;&#x5DC;&#x5DD; and &#x645;&#x631;&#x62D;&#x628;&#x627; &#x628;&#x627;&#x644;&#x639;&#x627;&#x644;&#x645; in one line (with 123 numbers).</Label>
+        <Label class="body rtl">&#x627;&#x644;&#x646;&#x635; &#x627;&#x644;&#x639;&#x631;&#x628;&#x64A; &#x64A;&#x64F;&#x643;&#x62A;&#x628; &#x645;&#x646; &#x627;&#x644;&#x64A;&#x645;&#x64A;&#x646; &#x625;&#x644;&#x649; &#x627;&#x644;&#x64A;&#x633;&#x627;&#x631;&#x60C; &#x648;&#x62A;&#x62A;&#x635;&#x644; &#x62D;&#x631;&#x648;&#x641;&#x647; &#x628;&#x628;&#x639;&#x636;&#x647;&#x627; &#x627;&#x644;&#x628;&#x639;&#x636;.</Label>
+      </Element>
+    </Element>
+    <Element class="row">
+      <Element class="card">
+        <Label class="caption" text="Chinese, Japanese, Korean"/>
+        <Label class="body">&#x65E5;&#x672C;&#x8A9E;&#x306E;&#x6587;&#x7AE0;&#x306F;&#x3001;&#x53E5;&#x8AAD;&#x70B9;&#x306E;&#x524D;&#x3067;&#x6539;&#x884C;&#x3057;&#x307E;&#x305B;&#x3093;&#x3002;&#x4E2D;&#x6587;&#x6392;&#x7248;&#x4E5F;&#x9075;&#x5B88;&#x7981;&#x5219;&#x3002;&#xD55C;&#xAD6D;&#xC5B4; &#xBB38;&#xC7A5;&#xB3C4; &#xC904;&#xBC14;&#xAFC8;&#xB429;&#xB2C8;&#xB2E4;.</Label>
+      </Element>
+      <Element class="card">
+        <Label class="caption" text="Color glyphs"/>
+        <Label class="body large">Emoji: &#x1F600; &#x1F389; &#x1F44D; &#x2764; &#x1F680; &#x1F308; &#x1F355;</Label>
+        <Label class="body cut">This line is far too long for its box and ends with an ellipsis.</Label>
+      </Element>
+      <Element class="card narrow">
+        <Label class="caption" text="Wrapping"/>
+        <Label class="body">Lines break where the rules allow: after spaces and hyphens, never inside a word unless it is longer than the line, like Supercalifragilisticexpialidocious.</Label>
+      </Element>
+    </Element>
+  </Element>
+</HXML>

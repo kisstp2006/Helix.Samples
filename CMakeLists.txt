@@ -46,11 +46,17 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         helix_add_executable(helix_samples_compare SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/Tools/CompareImages/CompareImages.cpp" DEPS Helix::Image Helix::Platform)
         set_target_properties(helix_samples_compare PROPERTIES OUTPUT_NAME CompareImages)
         set(runner "${CMAKE_CURRENT_SOURCE_DIR}/Tests/RunSample.cmake")
-        foreach(sample IN ITEMS UILayout)
+        # Samples drawn with the machine's fonts (MACHINE_FONTS) run everywhere but compare their screenshots only
+        # where the goldens were made (not on CI, whose fonts differ).
+        foreach(sample IN ITEMS UILayout UIText)
+            set(machine_fonts 0)
+            if(sample STREQUAL "UIText")
+                set(machine_fonts 1)
+            endif()
             foreach(pipeline IN ITEMS standard physical)
                 add_test(NAME helix_samples_${sample}_${pipeline}
                          COMMAND "${CMAKE_COMMAND}" "-DLAUNCHER=$<TARGET_FILE:helix_samples>" "-DCOMPARE=$<TARGET_FILE:helix_samples_compare>"
-                                 "-DSAMPLE=${sample}" "-DPIPELINE=${pipeline}"
+                                 "-DSAMPLE=${sample}" "-DPIPELINE=${pipeline}" "-DMACHINE_FONTS=${machine_fonts}"
                                  "-DGOLDEN=${CMAKE_CURRENT_SOURCE_DIR}/Tests/Golden/${sample}-${pipeline}.png"
                                  "-DOUT=${CMAKE_CURRENT_BINARY_DIR}/shots/${sample}-${pipeline}.png" -P "${runner}")
             endforeach()

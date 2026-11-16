@@ -57,7 +57,8 @@ def ui_scene(sample, markup, background):
 
 
 # The samples: name, product name, the scene's markup and background color.
-SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.08, 0.09, 0.11, 1))]
+SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.08, 0.09, 0.11, 1)),
+               ("UIText", "Helix Samples - UI Text", "UI/UIText.hxml", (0.08, 0.09, 0.11, 1))]
 
 
 def main():
