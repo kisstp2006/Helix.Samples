@@ -9,6 +9,7 @@
 #include <Helix/Engine/Rendering/Pipeline/RenderPipeline.h>
 #include <Helix/Engine/Script/ScriptRuntime.h>
 #include <Helix/Engine/Script/ScriptableObject.h>
+#include <Helix/Scripting/Bindings/Interop.h>
 #include <Helix/Platform/IO/FileSystem.h>
 #include <Helix/Platform/Window/Window.h>
 #include <Helix/Player/Host/Player.h>
@@ -19,6 +20,7 @@ extern "C" void HxBindings_HelixRenderPipelinesCore_Publish();
 extern "C" void HxBindings_HelixRenderPipelinesStandard_Publish();
 extern "C" void HxBindings_HelixRenderPipelinesPhysical_Publish();
 extern "C" void HxBindings_HelixUI_Publish();
+HX_BINDINGS_EXPORT void HxBindings_HelixSamples_Publish();
 
 namespace helix::samples
 {
@@ -44,6 +46,8 @@ namespace helix::samples
         constexpr ModuleEntry kModules[] = {
             {"HelixRenderPipelinesCore", &HxBindings_HelixRenderPipelinesCore_Publish},
             {"HelixUI", &HxBindings_HelixUI_Publish},
+            // The launcher's own game module: the samples' C++ element types (Gauge).
+            {"HelixSamples", &HxBindings_HelixSamples_Publish},
         };
 
         bool Register(StringView name, void (*publish)())
@@ -155,6 +159,10 @@ namespace helix::samples
         if (!player::ParseCommandLine(Span<const StringView>(playerArgs.Data(), playerArgs.Size()), options, errors))
             for (const String& e : errors)
                 HX_LOG_ERROR(SamplesLog, "Command line: {}", e);
+        // A sample's C# scripts are built beside the launcher (Managed/<sample>), the data folder stays the sources.
+        String managed = platform::JoinPath(platform::JoinPath(platform::GetDirectoryName(platform::ExecutablePath()), "Managed"), launcher.sample.View());
+        if (!launcher.sample.Empty() && platform::DirectoryExists(managed))
+            options.managedFolder = managed;
 
         const PipelineEntry* pipeline = FindPipeline(launcher.pipeline.View());
         bool registered = true;

@@ -1,0 +1,16 @@
+/* The styles sample's theme: its colors as variables at the root, then the sheets of its look (imported). Change a
+   color and save: the sample shows it within a second. */
+
+@import url("UIStylesBase.hss");
+
+:root {
+    --panel: #1e222b;
+    --raised: #2a303c;
+    --line: #3a4252;
+    --text: #e6e9ef;
+    --muted: #8892a6;
+    --accent: #4f9dff;
+    --warm: #ff8a4c;
+    --cool: #3fd0a8;
+    --gold: #ffd54a;
+}

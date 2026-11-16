@@ -1,0 +1,84 @@
+/* The styles sample's look: transforms with transitions, backgrounds placed, sized and repeated, text shadows and
+   outlines, the ellipsis's place, cursors. Its colors are the theme's variables (UIStyles.tss). */
+
+#page { flex-grow: 1; padding: 16px; color: var(--text); font-size: 15px; }
+
+#title { font-size: 30px; -helix-font-style: bold; color: var(--accent); margin-bottom: 10px;
+         text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.7); }
+
+.row { flex-direction: row; flex-grow: 1; flex-basis: 0px; margin-bottom: 12px; }
+
+.card {
+    flex-grow: 1;
+    flex-basis: 0px;
+    margin-right: 12px;
+    padding: 12px;
+    background-color: var(--panel);
+    border-width: 1px;
+    border-color: #3a4252;
+    border-radius: 14px;
+}
+
+.caption { color: var(--muted); font-size: 13px; -helix-font-style: bold; margin-bottom: 10px; }
+
+.tiles { flex-direction: row; align-items: center; justify-content: space-around; flex-grow: 1; }
+
+/* ------------------------------------------------------------------------------------------- transforms */
+
+.tile {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background-color: var(--raised);
+    border-width: 2px;
+    border-color: var(--accent);
+    transition: rotate 0.3s ease-out, scale 0.3s ease-out, translate 0.3s ease-out;
+    cursor: link;
+}
+.tile.turned { rotate: 15deg; }
+.tile.scaled { scale: 1.25 0.8; transform-origin: left bottom; border-color: var(--warm); }
+.tile.moved { translate: 0px -12px; border-color: var(--cool); }
+.tile.all { rotate: -0.05turn; scale: 0.9; translate: 4px 6px; border-color: var(--gold); }
+.tile:hover { rotate: 0deg; scale: 1.15; translate: 0px 0px; }
+
+/* A turned box that clips: its children stay inside its turned, rounded corners. */
+.clipper {
+    flex-shrink: 0;
+    width: 96px;
+    height: 64px;
+    overflow: hidden;
+    border-radius: 16px;
+    rotate: -10deg;
+    background-image: url("../Images/CC0/PolyHavenAlpsField.png");
+    background-size: cover;
+    cursor: url("../Images/Cursor.png") 1 1;
+}
+.clipper-badge { position: absolute; left: 60px; top: -10px; width: 60px; height: 40px; background-color: var(--warm); rotate: 30deg; }
+
+/* ------------------------------------------------------------------------------------------- backgrounds */
+
+.bg {
+    flex-shrink: 0;
+    width: 76px;
+    height: 64px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: var(--line);
+    background-color: #12151b;
+}
+.bg.repeat { background-image: url("../Images/Star.png"); background-size: 16px 16px; background-repeat: repeat; }
+.bg.space { background-image: url("../Images/CC0/KenneyIconStar.png"); background-size: 24px auto; background-repeat: space no-repeat;
+            background-position: center; }
+.bg.round { background-image: url("../Images/Checker.png"); background-size: 20px 20px; background-repeat: round; }
+.bg.place { background-image: url("../Images/Landscape.png"); background-size: 60px auto; background-position: right 4px bottom 4px; }
+.bg.cover { background-image: url("../Images/CC0/KenneyPanel.png"); background-size: contain; background-position: left center; }
+
+/* ------------------------------------------------------------------------------------------------- text */
+
+.text-column { flex-grow: 1; justify-content: space-around; }
+.shadowed { font-size: 22px; -helix-font-style: bold; color: var(--gold); text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.85); }
+.outlined { font-size: 22px; -helix-font-style: bold; color: #ffffff; -helix-text-outline-width: 1.5px; -helix-text-outline-color: var(--accent); }
+.cut { width: 160px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; color: var(--muted); }
+.cut.start { -helix-text-overflow-position: start; }
+.cut.middle { -helix-text-overflow-position: middle; }

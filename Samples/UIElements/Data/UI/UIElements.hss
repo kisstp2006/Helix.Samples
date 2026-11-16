@@ -1,0 +1,46 @@
+/* The element types sample's look; its colors come from the theme the C# script puts on the root (Dark.hss or
+   Light.hss), these are the fallbacks. */
+
+#page { flex-grow: 1; padding: 16px; color: var(--text, #e6e9ef); font-size: 15px; background-color: var(--page, #14171d); }
+
+#title { font-size: 30px; -helix-font-style: bold; color: var(--accent, #4f9dff); margin-bottom: 12px; }
+
+.row { flex-direction: row; margin-bottom: 14px; }
+
+/* StatCard: its strip and body are its own elements. */
+StatCard {
+    flex-grow: 1;
+    flex-basis: 0px;
+    margin-right: 14px;
+    height: 120px;
+    border-radius: 14px;
+    border-width: 1px;
+    border-top-width: 3px;
+    border-color: var(--line, #3a4252);
+    background-color: var(--panel, #1e222b);
+    overflow: hidden;
+}
+StatCard.highlight { background-color: var(--raised, #2a303c); scale: 1.03; }
+.stat-strip { height: 6px; }
+.stat-body { flex-grow: 1; padding: 12px; justify-content: space-between; }
+.stat-title { font-size: 16px; -helix-font-style: bold; }
+
+/* Gauge: a C++ class's parts. */
+.gauge { height: 14px; flex-shrink: 0; }
+.gauge-track { flex-grow: 1; border-radius: 7px; background-color: var(--track, #0f1116); overflow: hidden; }
+.gauge-fill { height: 100%; border-radius: 7px; }
+
+.card { padding: 12px; border-radius: 14px; background-color: var(--panel, #1e222b); margin-bottom: 14px; }
+.caption { color: var(--muted, #8892a6); font-size: 13px; -helix-font-style: bold; margin-bottom: 8px; }
+
+.list-row { flex-direction: row; align-items: center; height: 30px; margin-bottom: 6px; margin-right: 24px; padding: 0px 10px;
+            border-radius: 8px; background-color: var(--raised, #2a303c); }
+.list-row .row-text { width: 140px; }
+.list-row .gauge { flex-grow: 1; }
+.row-1 { opacity: 0.85; }
+.row-2 { opacity: 0.7; }
+
+.button { align-self: flex-start; padding: 8px 14px; border-radius: 10px; background-color: var(--accent, #4f9dff);
+          cursor: link; transition: scale 0.2s ease-out; }
+.button:hover { scale: 1.05; }
+.button-text { color: var(--on-accent, #0b1220); -helix-font-style: bold; }

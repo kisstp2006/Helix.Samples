@@ -1,0 +1,7 @@
+<HXML>
+  <!-- One row of the list: the C# script clones it (UITemplate.CloneTree). -->
+  <Element class="list-row">
+    <Label class="row-text" text="A cloned row"/>
+    <Gauge value="0.55" tint="#ffd54a"/>
+  </Element>
+</HXML>

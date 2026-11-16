@@ -15,8 +15,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAMPLES = os.path.join(ROOT, "Samples")
 HEADER = "%YAML 1.1\n%TAG !h! tag:helixengine,2026:\n"
 
-# The C++ script classes the samples' scenes use: (asset name, module, namespace, class).
+# The script classes the samples' scenes use: (asset name, module or assembly, namespace, class); the C++ UIView in
+# every sample, a sample's own C# classes beside it.
 SCRIPTS = [("UIView", "HelixUI", "HelixEngine.UI", "UIView")]
+SAMPLE_SCRIPTS = {"UIElements": [("UIElementsDemo", "HelixSamples.UIElements", "HelixSamples", "UIElementsDemo")]}
 
 # The fileID of the main object of a script asset (a MonoBehaviour's class ID times 100000).
 MAIN_SCRIPT_OBJECT = 11400000
@@ -141,9 +143,34 @@ def star(x, y):
     return (1.0, 1.0, 1.0, 1.0 if inside else 0.0)
 
 
+def checker(x, y):
+    """Two colors in squares of 5, for round repetition (20 by 20)."""
+    return hex_color("#4f9dff") if (int(x // 5) + int(y // 5)) % 2 == 0 else hex_color("#2a303c")
+
+
+def cursor(x, y):
+    """An arrow pointer, its tip at (1, 1): white with a dark border (24 by 24)."""
+    def inside(px, py, grow):
+        # The arrow's outline: a triangle with a tail.
+        tri = py >= 1 - grow and px >= 1 - grow and px <= 1 + (py - 1) * 0.72 + grow and py <= 17 + grow
+        tail = 8 - grow <= py <= 22 + grow and abs(px - (5 + (py - 8) * 0.45)) <= 2.2 + grow
+        return tri or tail
+    if inside(x, y, 0):
+        return (1.0, 1.0, 1.0, 1.0)
+    if inside(x, y, 1.3):
+        return hex_color("#11151c")
+    return (0.0, 0.0, 0.0, 0.0)
+
+
 # The samples' images: path, size, shading.
 IMAGES = {"UIRender": [("Images/Landscape.png", 192, 112, landscape), ("Images/Avatar.png", 96, 96, avatar),
-                       ("Images/Frame.png", 48, 48, frame), ("Images/Star.png", 32, 32, star)]}
+                       ("Images/Frame.png", 48, 48, frame), ("Images/Star.png", 32, 32, star)],
+          "UIStyles": [("Images/Landscape.png", 192, 112, landscape), ("Images/Star.png", 32, 32, star),
+                       ("Images/Checker.png", 20, 20, checker), ("Images/Cursor.png", 24, 24, cursor)]}
+
+# The C# components of a sample's UI object: their script asset and serialized fields (assets of the folder).
+SAMPLE_COMPONENTS = {"UIElements": [("Scripts/UIElementsDemo.asset", [("rowTemplate", "UI/Row.hxml"), ("darkTheme", "UI/Dark.hss"),
+                                                                     ("lightTheme", "UI/Light.hss")])]}
 
 # Images in a UI: readable (into the UI's atlas), their bytes as they are, no mipmaps, clamped.
 IMAGE_META = ("TextureImporter:\n  mipmaps:\n    enableMipMap: 0\n  sRGBTexture: 0\n  isReadable: 1\n"
@@ -162,20 +189,27 @@ def color(c):
 
 
 def ui_scene(sample, markup, background):
-    """A camera clearing to the background color and a UIView of the markup that watches its files."""
+    """A camera clearing to the background color and a UIView of the markup that watches its files (and the
+    sample's C# components beside it)."""
+    components = SAMPLE_COMPONENTS.get(sample, [])
     out = [HEADER]
     out.append("--- !h!1 &100\nGameObject:\n  m_Component:\n  - component: {fileID: 101}\n  - component: {fileID: 102}\n"
                "  m_Name: Main Camera\n  m_IsActive: 1\n")
     out.append("--- !h!4 &101\nTransform:\n  m_GameObject: {fileID: 100}\n  m_Children: []\n  m_Father: {fileID: 0}\n")
     out.append(f"--- !h!20 &102\nCamera:\n  m_GameObject: {{fileID: 100}}\n  m_Enabled: 1\n  m_ClearFlags: 2\n"
                f"  m_BackGroundColor: {color(background)}\n")
-    out.append("--- !h!1 &110\nGameObject:\n  m_Component:\n  - component: {fileID: 111}\n  - component: {fileID: 112}\n"
+    listed = "".join(f"  - component: {{fileID: {113 + i}}}\n" for i in range(len(components)))
+    out.append("--- !h!1 &110\nGameObject:\n  m_Component:\n  - component: {fileID: 111}\n  - component: {fileID: 112}\n" + listed +
                "  m_Name: UI\n  m_IsActive: 1\n")
     out.append("--- !h!4 &111\nTransform:\n  m_GameObject: {fileID: 110}\n  m_Children: []\n  m_Father: {fileID: 0}\n")
     out.append(f"--- !h!114 &112\nGameBehaviour:\n  m_GameObject: {{fileID: 110}}\n  m_Enabled: 1\n"
                f"  m_Script: {{fileID: 11500000, guid: {guid(sample, 'Scripts/UIView.asset')}, type: 3}}\n"
                f"  m_Source: {{fileID: {MAIN_SCRIPT_OBJECT}, guid: {guid(sample, markup)}, type: 3}}\n"
                f"  m_SortingOrder: 0\n  m_WatchFiles: 1\n")
+    for i, (script, fields) in enumerate(components):
+        values = "".join(f"  {name}: {{fileID: {MAIN_SCRIPT_OBJECT}, guid: {guid(sample, path)}, type: 3}}\n" for name, path in fields)
+        out.append(f"--- !h!114 &{113 + i}\nGameBehaviour:\n  m_GameObject: {{fileID: 110}}\n  m_Enabled: 1\n"
+                   f"  m_Script: {{fileID: 11500000, guid: {guid(sample, script)}, type: 3}}\n" + values)
     return "".join(out)
 
 
@@ -183,13 +217,15 @@ def ui_scene(sample, markup, background):
 SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.08, 0.09, 0.11, 1)),
                ("UIText", "Helix Samples - UI Text", "UI/UIText.hxml", (0.08, 0.09, 0.11, 1)),
                ("UIRender", "Helix Samples - UI Rendering", "UI/UIRender.hxml", (0.08, 0.09, 0.11, 1)),
-               ("UIInput", "Helix Samples - UI Input", "UI/UIInput.hxml", (0.08, 0.09, 0.11, 1))]
+               ("UIInput", "Helix Samples - UI Input", "UI/UIInput.hxml", (0.08, 0.09, 0.11, 1)),
+               ("UIStyles", "Helix Samples - UI Styles", "UI/UIStyles.hxml", (0.08, 0.09, 0.11, 1)),
+               ("UIElements", "Helix Samples - UI Element Types", "UI/UIElements.hxml", (0.08, 0.09, 0.11, 1))]
 
 
 def main():
     for sample, product, markup, background in SAMPLE_LIST:
         data = os.path.join(SAMPLES, sample, "Data")
-        for asset, module, namespace, name in SCRIPTS:
+        for asset, module, namespace, name in SCRIPTS + SAMPLE_SCRIPTS.get(sample, []):
             write(data, f"Scripts/{asset}.asset", script_asset(module, namespace, name))
         write(data, f"Scenes/{sample}.helix", ui_scene(sample, markup, background))
         for path, width, height, shade in IMAGES.get(sample, []):

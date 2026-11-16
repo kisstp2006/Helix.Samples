@@ -1,0 +1,47 @@
+<HXML>
+  <!-- Styles: edit this file, UIStyles.tss (the theme) or UIStylesBase.hss while the sample runs. Hover the tiles:
+       they turn back with a transition; the pointer is a link over them and an image over the photo. -->
+  <Style src="UIStyles.tss"/>
+  <Element name="page">
+    <Label name="title" text="Helix UI styles"/>
+    <Element class="row">
+      <Element class="card">
+        <Label class="caption" text="Rotate, scale, translate (hover them)"/>
+        <Element class="tiles">
+          <Element class="tile turned"/>
+          <Element class="tile scaled"/>
+          <Element class="tile moved"/>
+          <Element class="tile all"/>
+        </Element>
+      </Element>
+      <Element class="card">
+        <Label class="caption" text="A turned box clips its children"/>
+        <Element class="tiles">
+          <Element class="clipper"><Element class="clipper-badge"/></Element>
+        </Element>
+      </Element>
+    </Element>
+    <Element class="row">
+      <Element class="card">
+        <Label class="caption" text="Backgrounds: repeat, space, round, place, contain"/>
+        <Element class="tiles">
+          <Element class="bg repeat"/>
+          <Element class="bg space"/>
+          <Element class="bg round"/>
+          <Element class="bg place"/>
+          <Element class="bg cover"/>
+        </Element>
+      </Element>
+      <Element class="card">
+        <Label class="caption" text="Text: shadow, outline, the ellipsis's place"/>
+        <Element class="text-column">
+          <Label class="shadowed" text="A soft shadow"/>
+          <Label class="outlined" text="An outline"/>
+          <Label class="cut" text="The end is cut when it does not fit"/>
+          <Label class="cut start" text="The start is cut when it does not fit"/>
+          <Label class="cut middle" text="The middle is cut when it does not fit"/>
+        </Element>
+      </Element>
+    </Element>
+  </Element>
+</HXML>

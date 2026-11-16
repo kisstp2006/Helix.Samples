@@ -1,0 +1,28 @@
+<HXML>
+  <!-- Element types: StatCard is a C# class (Scripts/StatCard.cs), Gauge a C++ class of the launcher
+       (Source/Helix/Samples/Elements/Gauge.h); both are made from this markup with their attributes. The rows of the
+       list are cloned from Row.hxml by a C# script, which also puts the theme sheet on the root and switches it. -->
+  <Style src="UIElements.hss"/>
+  <Element name="page">
+    <Label name="title" text="Helix UI element types"/>
+    <Element class="row">
+      <StatCard name="speed" accent="#4f9dff" tilt="-2">
+        <Label class="stat-title" text="A C# StatCard"/>
+        <Gauge value="0.72" tint="#4f9dff"/>
+      </StatCard>
+      <StatCard name="heat" accent="#ff8a4c" tilt="0">
+        <Label class="stat-title" text="Attributes from markup"/>
+        <Gauge value="0.4" tint="#ff8a4c"/>
+      </StatCard>
+      <StatCard name="fuel" accent="#3fd0a8" tilt="2" highlight="true">
+        <Label class="stat-title" text="A C++ Gauge inside"/>
+        <Gauge value="0.9" tint="#3fd0a8"/>
+      </StatCard>
+    </Element>
+    <Element class="card">
+      <Label class="caption" text="Rows cloned from Row.hxml by a C# script"/>
+      <Element name="list"/>
+    </Element>
+    <Element name="theme" class="button"><Label class="button-text" text="Switch the theme (styleSheets from C#)"/></Element>
+  </Element>
+</HXML>

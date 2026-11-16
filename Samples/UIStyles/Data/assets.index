@@ -1,0 +1,13 @@
+# The sample's data folder: every file, its guid and its path (Tools/GenerateData.py).
+f5724c2bcfbcfc515b0308813b14b99d Images/CC0/KenneyIconStar.png
+2cf7fcfc4401c7dbc1080746b9a621ac Images/CC0/KenneyPanel.png
+4a3f6cfc594d0f0c34dbf4fe4dd05f25 Images/CC0/PolyHavenAlpsField.png
+4d06040c4886d9e591f3a014cbab765a Images/Checker.png
+1564d70956f38a6ffa3e829e4b63c46c Images/Cursor.png
+65ae7b3a1dacb830b2a9473bd20462ed Images/Landscape.png
+928aa2d0d22c6f02e6a821e5ae2dc244 Images/Star.png
+9dfdd4ce19784dd1881dbda591e62ff5 Scenes/UIStyles.helix
+2829193845e2b0321911978cdc9f5f00 Scripts/UIView.asset
+12a42c4060a7b694647101591c7cbc24 UI/UIStyles.hxml
+2bcb85ba992f8058a8d602992a805569 UI/UIStyles.tss
+becd43c76e3581c156040c83fd5e62c1 UI/UIStylesBase.hss
