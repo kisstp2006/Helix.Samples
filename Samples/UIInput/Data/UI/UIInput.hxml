@@ -1,0 +1,44 @@
+<HXML>
+  <!-- Input: hover, press and click the buttons, Tab and Shift+Tab around the focus ring, type (an input method
+       composes in place), drag the cards between the lists. The launcher's sample element types (SampleButton,
+       SampleTextBox, SampleDragItem, SampleDropList, SampleProbe, SampleEventLog) build on the panel's events. -->
+  <Style src="UIInput.hss"/>
+  <SampleProbe name="page">
+    <Label name="title" text="Helix UI input"/>
+    <Element class="row">
+      <Element class="column">
+        <Element class="card">
+          <Label class="caption" text="Buttons: hover, press, click, focus (Tab, Enter)"/>
+          <Element class="buttons">
+            <SampleButton name="Play" class="button" text="Play"/>
+            <SampleButton name="Options" class="button" text="Options"/>
+            <SampleButton name="Quit" class="button warm" text="Quit"/>
+            <SampleButton name="Off" class="button" text="Off" enabled="false"/>
+          </Element>
+        </Element>
+        <Element class="card">
+          <Label class="caption" text="Text: type, Backspace; an input method composes underlined"/>
+          <SampleTextBox name="Name" class="text-box"/>
+          <SampleTextBox name="Note" class="text-box"/>
+        </Element>
+        <Element class="card grow">
+          <Label class="caption" text="Drag and drop: move the cards between the lists"/>
+          <Element class="lists">
+            <SampleDropList name="Todo" class="list">
+              <SampleDragItem name="Layout" class="item" text="Layout"/>
+              <SampleDragItem name="Styles" class="item" text="Styles"/>
+              <SampleDragItem name="Text" class="item" text="Text"/>
+            </SampleDropList>
+            <SampleDropList name="Done" class="list">
+              <SampleDragItem name="Events" class="item" text="Events"/>
+            </SampleDropList>
+          </Element>
+        </Element>
+      </Element>
+      <Element class="card log-card">
+        <Label class="caption" text="Events in their order"/>
+        <SampleEventLog name="log" class="log"/>
+      </Element>
+    </Element>
+  </SampleProbe>
+</HXML>

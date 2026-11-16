@@ -8,6 +8,7 @@ Samples of the Helix engine, run by a launcher: the player with both render pipe
 |---|---|
 | `UILayout` | A page of HXML markup and HSS styles: rows and columns, wrapping, alignment, aspect ratios, percentages, borders, opacity, variables and templates. Edit `Samples/UILayout/Data/UI/UILayout.hss` or `UILayout.hxml` while it runs: the page changes within a second. |
 | `UIText` | Text in labels: rich text tags, Hebrew and Arabic within English and an Arabic paragraph, Chinese, Japanese and Korean with their line rules, color emoji, an ellipsis and wrapping, drawn with the machine's fonts. Edit `Samples/UIText/Data/UI/UIText.hss` or `UIText.hxml` while it runs. |
+| `UIInput` | Input: buttons with hover, pressed and focus styles, the focus ring by Tab and Shift+Tab, text boxes that take typed text and show what an input method composes, cards dragged between two lists, and a log of the events in their order, all made by the launcher's sample element types on the panel's events. |
 | `UIRender` | Drawing: rounded boxes, borders of four colors, a circle, images stretched, cropped and fitted, tinted icons, 9-slice buttons and panels, a list and an image clipped to rounded and round boxes, and charts painted with vector paths (a line with a gradient, bars, a donut) by the launcher's `SampleChart` element. Its images are its own (drawn by `Tools/GenerateData.py`) beside CC0 art of Kenney and Poly Haven (`Samples/UIRender/CREDITS.txt`). |
 
 ## Running
@@ -17,6 +18,7 @@ HelixSamples -sample UILayout -pipeline standard
 HelixSamples -sample UILayout -pipeline physical
 HelixSamples -sample UIText -pipeline standard
 HelixSamples -sample UIRender -pipeline none
+HelixSamples -sample UIInput
 ```
 
 `-pipeline` picks the render pipeline (`standard` by default; `none` runs without one: the engine clears the cameras and
@@ -30,6 +32,7 @@ once.
 | Path | Content |
 |---|---|
 | `Source/Helix/Samples/Launcher/` | The launcher: the pipelines it knows (name, module, how its asset is made), the modules it registers, the shader folder it loads |
+| `Source/Helix/Samples/Interaction/` | The sample element types of `UIInput` (a button, a text box, drag items and drop lists, a probe and a log of events) |
 | `Source/Helix/Samples/Charts/` | The `SampleChart` element type: charts of the values in its markup, painted by kind from a table |
 | `Samples/<name>/Data/` | Each sample's data folder: its own files, and the settings, scene, script assets, images, their .meta and the index a build would leave (written by `Tools/GenerateData.py`) |
 | `Tools/PrepareImages.py` | Puts the CC0 art into the data folders from the downloaded packs (listed in each sample's `CREDITS.txt`) |

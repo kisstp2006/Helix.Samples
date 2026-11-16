@@ -1,0 +1,88 @@
+/* The input sample's styles: change a value and save, the sample shows it within a second. */
+
+#page {
+    --panel: #1e222b;
+    --raised: #2a303c;
+    --text: #e6e9ef;
+    --muted: #8892a6;
+    --accent: #4f9dff;
+    --warm: #ff8a4c;
+    --cool: #3fd0a8;
+    flex-grow: 1;
+    padding: 16px;
+    color: var(--text);
+    font-size: 15px;
+}
+
+#title { font-size: 30px; -helix-font-style: bold; color: var(--accent); margin-bottom: 10px; }
+
+.row { flex-direction: row; flex-grow: 1; }
+.column { flex-grow: 1.4; flex-basis: 0px; margin-right: 12px; }
+
+.card {
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: var(--panel);
+    border-width: 1px;
+    border-color: #3a4252;
+    border-radius: 14px;
+}
+.card.grow { flex-grow: 1; margin-bottom: 0px; }
+.caption { color: var(--muted); font-size: 13px; -helix-font-style: bold; margin-bottom: 8px; }
+
+/* Buttons: the states come from the events (:hover under the mouse, :active while pressed, :focus). */
+.buttons { flex-direction: row; }
+.button {
+    padding: 8px 18px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #3a4252;
+    background-color: var(--raised);
+    -helix-font-style: bold;
+}
+.button:hover { background-color: #34405a; border-color: #4a5468; }
+.button:active { background-color: var(--accent); border-color: #8fc1ff; }
+.button:focus { border-color: #4f9dff; }
+.button.warm:active { background-color: var(--warm); border-color: #ffc09c; }
+.button:disabled { color: #5a6275; background-color: #23272f; }
+
+/* Text boxes: focusable, the focus ring shows on them. */
+.text-box {
+    height: 34px;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #3a4252;
+    background-color: #161a21;
+    white-space: nowrap;
+}
+.text-box:hover { border-color: #4a5468; }
+.text-box:focus { border-color: #4f9dff; }
+
+/* Drag and drop. */
+.lists { flex-direction: row; flex-grow: 1; }
+.list {
+    flex-grow: 1;
+    flex-basis: 0px;
+    margin-right: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #3a4252;
+    background-color: #161a21;
+}
+.list.drop-target { border-color: #3fd0a8; background-color: #1b2a29; }
+.item {
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    background-color: var(--raised);
+}
+.item:hover { background-color: #34405a; }
+.item.dragging { background-color: var(--accent); opacity: 0.7; }
+
+/* The log. */
+.log-card { flex-grow: 1; flex-basis: 0px; margin-bottom: 0px; }
+.log { font-size: 13px; color: #c4cad6; }

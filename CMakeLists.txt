@@ -48,8 +48,8 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         set(runner "${CMAKE_CURRENT_SOURCE_DIR}/Tests/RunSample.cmake")
         # Samples drawn with the machine's fonts (MACHINE_FONTS) run everywhere but compare their screenshots only
         # where the goldens were made (not on CI, whose fonts differ).
-        set(machine_font_samples UIText UIRender)
-        foreach(sample IN ITEMS UILayout UIText UIRender)
+        set(machine_font_samples UIText UIRender UIInput)
+        foreach(sample IN ITEMS UILayout UIText UIRender UIInput)
             set(machine_fonts 0)
             if(sample IN_LIST machine_font_samples)
                 set(machine_fonts 1)
