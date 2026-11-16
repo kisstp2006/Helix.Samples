@@ -20,7 +20,6 @@ namespace HelixSamples
             {
                 m_Accent = value;
                 m_Strip.style.backgroundColor = value;
-                style.borderTopColor = value;
             }
         }
 

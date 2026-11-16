@@ -14,14 +14,11 @@ StatCard {
     margin-right: 14px;
     height: 120px;
     border-radius: 14px;
-    border-width: 1px;
-    border-top-width: 3px;
-    border-color: var(--line, #3a4252);
     background-color: var(--panel, #1e222b);
     overflow: hidden;
 }
 StatCard.highlight { background-color: var(--raised, #2a303c); scale: 1.03; }
-.stat-strip { height: 6px; }
+.stat-strip { height: 5px; }
 .stat-body { flex-grow: 1; padding: 12px; justify-content: space-between; }
 .stat-title { font-size: 16px; -helix-font-style: bold; }
 
