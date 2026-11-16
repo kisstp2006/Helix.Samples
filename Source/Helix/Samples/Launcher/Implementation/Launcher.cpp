@@ -9,6 +9,8 @@
 #include <Helix/Platform/IO/FileSystem.h>
 #include <Helix/Platform/Window/Window.h>
 #include <Helix/Player/Host/Player.h>
+#include <Helix/RenderPipelines/Physical/Pipeline/PhysicalRenderPipelineAsset.h>
+#include <Helix/RenderPipelines/Standard/Pipeline/UniversalRenderPipelineAsset.h>
 
 extern "C" void HxBindings_HelixRenderPipelinesCore_Publish();
 extern "C" void HxBindings_HelixRenderPipelinesStandard_Publish();
@@ -21,9 +23,12 @@ namespace helix::samples
     {
         LogChannel SamplesLog{"Samples"};
 
+        engine::ScriptableObject* CreateStandard() { return rendering::universal::UniversalRenderPipelineAsset::Create(); }
+        engine::ScriptableObject* CreatePhysical() { return rendering::physical::PhysicalRenderPipelineAsset::Create(); }
+
         constexpr PipelineEntry kPipelines[] = {
-            {"standard", "HelixRenderPipelinesStandard", &HxBindings_HelixRenderPipelinesStandard_Publish, "UniversalRenderPipelineAsset"},
-            {"physical", "HelixRenderPipelinesPhysical", &HxBindings_HelixRenderPipelinesPhysical_Publish, "PhysicalRenderPipelineAsset"},
+            {"standard", "HelixRenderPipelinesStandard", &HxBindings_HelixRenderPipelinesStandard_Publish, &CreateStandard},
+            {"physical", "HelixRenderPipelinesPhysical", &HxBindings_HelixRenderPipelinesPhysical_Publish, &CreatePhysical},
         };
 
         // The modules every sample has beside the pipelines.
@@ -164,14 +169,14 @@ namespace helix::samples
             return code;
         }
         engine::FolderAssetSource* shaders = LoadShaders();
-        engine::ScriptableObject* asset = engine::ScriptableObject::CreateInstanceByName(pipeline->assetClass);
+        engine::ScriptableObject* asset = pipeline->createAsset();
         if (asset)
         {
             engine::GraphicsSettings::SetDefaultRenderPipeline(asset);
             HX_LOG_INFO(SamplesLog, "Sample {} on the {} pipeline.", launcher.sample.View(), pipeline->name);
         }
         else
-            HX_LOG_ERROR(SamplesLog, "The pipeline asset {} could not be made.", pipeline->assetClass);
+            HX_LOG_ERROR(SamplesLog, "The {} pipeline's asset could not be made.", pipeline->name);
         platform::RunMainLoop(&RunFrame, &run);
         i32 code = run.player.ExitCode();
         engine::GraphicsSettings::SetDefaultRenderPipeline(nullptr);

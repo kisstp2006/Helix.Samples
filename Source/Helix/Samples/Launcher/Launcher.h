@@ -4,6 +4,11 @@
 #include <Helix/Core/Containers/Array.h>
 #include <Helix/Core/Strings/String.h>
 
+namespace helix::engine
+{
+    class ScriptableObject;
+}
+
 // The samples' launcher: the player with the render pipelines and the UI linked in. It takes the player's command line
 // and its own arguments:
 //   -pipeline <name>  the pipeline that renders (standard, physical; standard by default)
@@ -11,13 +16,14 @@
 // The shader assemblies of the pipelines and the UI are an asset folder beside the executable (Shaders/).
 namespace helix::samples
 {
-    // A pipeline the launcher can render with: its name on the command line, its game module and its asset's class.
+    // A pipeline the launcher can render with: its name on the command line, its game module, and how its asset is made
+    // (as the editor makes a new one: the Standard asset with its default renderer).
     struct PipelineEntry
     {
         StringView name;
         StringView module;
         void (*publish)() = nullptr;
-        StringView assetClass;
+        engine::ScriptableObject* (*createAsset)() = nullptr;
     };
 
     // The pipelines, the first one the default.
