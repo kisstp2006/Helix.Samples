@@ -51,8 +51,9 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
     set(samples_managed_root "${CMAKE_BINARY_DIR}/Managed")
     get_filename_component(samples_runtime_dir "${HELIX_SCRIPTING_RUNTIME}" DIRECTORY)
     get_filename_component(samples_runtime_name "${HELIX_SCRIPTING_RUNTIME}" NAME_WLE)
-    set(samples_engine_assemblies "${HELIX_SCRIPTING_RUNTIME}" "${samples_runtime_dir}/${samples_runtime_name}.runtimeconfig.json"
-        "${HELIX_CORE_MODULE}" ${HELIX_CORE_MODULE_REFERENCES} "${HELIX_UI_RUNTIME}")
+    # The runtime's config is written beside its assembly by the same build: copied, not depended on.
+    set(samples_engine_assemblies "${HELIX_SCRIPTING_RUNTIME}" "${HELIX_CORE_MODULE}" ${HELIX_CORE_MODULE_REFERENCES} "${HELIX_UI_RUNTIME}")
+    set(samples_engine_files ${samples_engine_assemblies} "${samples_runtime_dir}/${samples_runtime_name}.runtimeconfig.json")
     file(GLOB samples_script_projects CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Samples/*/Scripts/*.csproj")
     foreach(project IN LISTS samples_script_projects)
         get_filename_component(scripts_dir "${project}" DIRECTORY)
@@ -69,12 +70,12 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
             COMMAND "${HELIX_DOTNET}" build "${project}" -c Release --artifacts-path "${artifacts}" --nologo -v quiet
                     "-p:HelixCoreModule=${HELIX_CORE_MODULE}" "-p:HelixScriptingRuntime=${HELIX_SCRIPTING_RUNTIME}" "-p:HelixUIRuntime=${HELIX_UI_RUNTIME}"
             COMMAND "${CMAKE_COMMAND}" -E make_directory "${out}"
-            COMMAND "${CMAKE_COMMAND}" -E copy "${dll}" ${samples_engine_assemblies} "${out}"
+            COMMAND "${CMAKE_COMMAND}" -E copy "${dll}" ${samples_engine_files} "${out}"
             COMMAND "${CMAKE_COMMAND}" -E touch "${out}/.staged"
             DEPENDS ${scripts} "${project}" ${samples_engine_assemblies}
             COMMENT "Building the C# scripts of the sample ${sample}")
         add_custom_target(helix_samples_scripts_${sample} ALL DEPENDS "${out}/.staged")
-        add_dependencies(helix_samples_scripts_${sample} helix_ui_runtime helix_core_module)
+        add_dependencies(helix_samples_scripts_${sample} helix_ui_runtime helix_core_module helix_scripting_runtime)
         add_dependencies(helix_samples helix_samples_scripts_${sample})
     endforeach()
 
