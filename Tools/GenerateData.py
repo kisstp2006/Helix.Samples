@@ -228,7 +228,8 @@ SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.
                ("UIElements", "Helix Samples - UI Element Types", "UI/UIElements.hxml", (0.08, 0.09, 0.11, 1)),
                ("UIControls", "Helix Samples - UI Controls", "UI/UIControls.hxml", (0.11, 0.13, 0.17, 1)),
                ("UICollections", "Helix Samples - UI Collections", "UI/UICollections.hxml", (0.11, 0.13, 0.17, 1)),
-               ("UIBinding", "Helix Samples - UI Data Binding", "UI/UIBinding.hxml", (0.11, 0.13, 0.17, 1))]
+               ("UIBinding", "Helix Samples - UI Data Binding", "UI/UIBinding.hxml", (0.11, 0.13, 0.17, 1)),
+               ("UINodeGraph", "Helix Samples - UI Node Graph", "UI/UINodeGraph.hxml", (0.13, 0.13, 0.13, 1))]
 
 
 def main():

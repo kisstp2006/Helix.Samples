@@ -1,0 +1,95 @@
+<HXML>
+  <Style src="UINodeGraph.hss"/>
+  <Element name="window" class="window">
+    <Element class="tabbar">
+      <Element class="tab tab--active">
+        <Element class="tab__icon tab__icon--graph"/>
+        <Label class="tab__label" text="Water Caustics"/>
+      </Element>
+      <Element class="tab">
+        <Element class="tab__icon tab__icon--scene"/>
+        <Label class="tab__label" text="Scene"/>
+      </Element>
+      <Element class="tab">
+        <Element class="tab__icon tab__icon--game"/>
+        <Label class="tab__label" text="Game"/>
+      </Element>
+      <Element class="tabbar__fill"/>
+      <Element class="tabbar__menu"><Element class="tabbar__menu-dot"/><Element class="tabbar__menu-dot"/><Element class="tabbar__menu-dot"/></Element>
+    </Element>
+    <Element class="toolbar">
+      <Label class="tool" text="Save Asset" tooltip="Writes the graph to its asset"/>
+      <Element class="tool tool--split"><Label class="tool__text" text="Save As..."/><Element class="tool__arrow"/></Element>
+      <Label class="tool" text="Show In Project"/>
+      <Label class="tool tool--disabled" text="Check Out"/>
+      <Element class="toolbar__fill"/>
+      <Label class="toolbar__label" text="Color Mode"/>
+      <Element class="dropdown"><Label class="dropdown__text" text="Category"/><Element class="dropdown__arrow"/></Element>
+      <Element class="toolbar__gap"/>
+      <Label class="tool tool--toggle tool--on" text="Blackboard"/>
+      <Label class="tool tool--toggle tool--on" text="Graph Inspector"/>
+      <Label class="tool tool--toggle tool--on" text="Main Preview"/>
+      <Label class="tool tool--icon" text="?" tooltip="Help"/>
+    </Element>
+    <Element class="workspace">
+      <SampleGraph name="graph" class="graph" inspector="inspector-body" status="status" node-tab="tab-node" graph-tab="tab-graph"
+                   select="Voronoi" frame-insets="232 10 262 10"/>
+
+      <Element class="panel blackboard">
+        <Element class="panel__header">
+          <Element class="panel__titles">
+            <Label class="panel__title" text="Water Caustics"/>
+            <Label class="panel__subtitle" text="Shader Graphs/Environment"/>
+          </Element>
+          <Label class="panel__add" text="+" tooltip="Adds a property, a keyword or a category"/>
+        </Element>
+        <Element class="panel__body">
+          <Element class="section__header">
+            <Element class="foldout"/>
+            <Label class="section__title" text="Surface"/>
+          </Element>
+          <Element class="property">
+            <Element class="property__pill"><Element class="property__dot property__dot--float"/><Label class="property__name" text="Speed"/></Element>
+            <Label class="property__type" text="Float"/>
+          </Element>
+          <Element class="property">
+            <Element class="property__pill"><Element class="property__dot property__dot--color"/><Label class="property__name" text="Deep Color"/></Element>
+            <Label class="property__type" text="Color"/>
+          </Element>
+          <Element class="property">
+            <Element class="property__pill"><Element class="property__dot property__dot--color"/><Label class="property__name" text="Foam Color"/></Element>
+            <Label class="property__type" text="Color"/>
+          </Element>
+          <Element class="property">
+            <Element class="property__pill"><Element class="property__dot property__dot--texture"/><Label class="property__name" text="Flow Map"/></Element>
+            <Label class="property__type" text="Texture2D"/>
+          </Element>
+          <Element class="section__header">
+            <Element class="foldout"/>
+            <Label class="section__title" text="Keywords"/>
+          </Element>
+          <Element class="property">
+            <Element class="property__pill"><Element class="property__dot property__dot--keyword"/><Label class="property__name" text="Foam"/></Element>
+            <Label class="property__type" text="Boolean Keyword"/>
+          </Element>
+        </Element>
+      </Element>
+
+      <Element class="panel inspector">
+        <Element class="panel__header panel__header--plain"><Label class="panel__title" text="Graph Inspector"/></Element>
+        <Element class="tabs">
+          <Label name="tab-node" class="tabs__tab" text="Node Settings"/>
+          <Label name="tab-graph" class="tabs__tab" text="Graph Settings"/>
+        </Element>
+        <Element name="inspector-body" class="inspector__body"/>
+      </Element>
+
+      <Element class="panel preview">
+        <Element class="panel__header panel__header--plain"><Label class="panel__title" text="Main Preview"/></Element>
+        <SampleNodePreview node="main" class="preview__view"/>
+      </Element>
+
+      <Label name="status" class="status"/>
+    </Element>
+  </Element>
+</HXML>

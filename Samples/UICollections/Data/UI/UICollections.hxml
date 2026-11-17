@@ -24,10 +24,15 @@
     </Element>
     <Element class="column">
       <Label class="heading" text="Painted in C#"/>
-      <Element name="chart" class="chart" tooltip="Bars, a line and a vector image drawn by generateVisualContent"/>
+      <Element name="chart" class="chart card" tooltip="Bars, a curve and a vector image drawn by generateVisualContent"/>
+      <Element class="meter-row">
+        <Label class="caption" text="Frame budget"/>
+        <Label name="meter-value" class="meter-value" text="62 %"/>
+      </Element>
       <Element name="meter" class="meter">
         <Element name="meter-fill" class="meter-fill"/>
       </Element>
+      <Element name="donut" class="donut card" tooltip="Each stage's share of the frame"/>
       <Label name="status" class="status" text="Select a row"/>
     </Element>
   </Element>

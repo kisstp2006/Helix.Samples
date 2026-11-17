@@ -1,6 +1,7 @@
 #include <Helix/Samples/Launcher/Launcher.h>
 
 #include <Helix/Samples/Charts/Chart.h>
+#include <Helix/Samples/Graph/GraphView.h>
 #include <Helix/Samples/Interaction/Interaction.h>
 
 #include <Helix/Core/Logging/Log.h>
@@ -175,6 +176,7 @@ namespace helix::samples
             return 1;
         RegisterSampleChart();
         RegisterSampleInteraction();
+        RegisterSampleGraph();
 
         Run run;
         if (!run.player.Start(options))

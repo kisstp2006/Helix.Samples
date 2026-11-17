@@ -1,0 +1,510 @@
+/* The node graph sample in the reference editor's dark skin: a tab strip and a toolbar over the graph, the blackboard,
+   the graph inspector and the main preview floating on it. The graph's own parts (nodes, ports, inline values, the
+   create node menu) are made by the launcher's C++ code with the graph- classes below. Colors are the skin's:
+   the graph 32, panels 43 to 46, headers and node titles 57, outputs 43, lines 25. */
+
+:root {
+    --graph: rgb(32, 32, 32);
+    --panel: rgb(46, 46, 46);
+    --panel-dark: rgb(43, 43, 43);
+    --header: rgb(57, 57, 57);
+    --line: rgb(25, 25, 25);
+    --text: rgb(196, 196, 196);
+    --bright: rgb(222, 222, 222);
+    --dim: rgb(136, 136, 136);
+    --field: rgb(42, 42, 42);
+    --button: rgb(88, 88, 88);
+    --accent: rgb(58, 121, 187);
+    font-size: 12px;
+    color: var(--text);
+}
+
+.window { flex-grow: 1; background-color: rgb(40, 40, 40); }
+
+/* ------------------------------------------------------------------------------------------------- tabs */
+
+.tabbar { flex-direction: row; height: 21px; padding-top: 2px; background-color: rgb(25, 25, 25); }
+
+.tab {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 12px 0 7px;
+    margin-left: 1px;
+    background-color: rgb(40, 40, 40);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.tab--active { background-color: rgb(60, 60, 60); border-top-width: 2px; border-color: var(--accent); }
+
+.tab__icon { width: 11px; height: 11px; margin-right: 5px; border-radius: 2px; background-color: rgb(130, 130, 130); }
+
+.tab__icon--graph { background-color: rgb(212, 212, 212); border-radius: 6px; border-width: 3px; border-color: rgb(110, 110, 110); }
+
+.tab__icon--scene { border-radius: 1px; rotate: 45deg; width: 8px; height: 8px; margin: 0 7px 0 2px; }
+
+.tab__icon--game { width: 12px; height: 9px; border-radius: 2px; }
+
+.tab__label { font-size: 12px; color: rgb(225, 225, 225); }
+
+.tab .tab__label { color: rgb(170, 170, 170); }
+
+.tab--active .tab__label { color: rgb(230, 230, 230); }
+
+.tabbar__fill { flex-grow: 1; }
+
+.tabbar__menu { flex-direction: column; justify-content: center; width: 14px; margin-right: 6px; align-items: center; }
+
+.tabbar__menu-dot { width: 3px; height: 3px; margin: 1px 0; border-radius: 2px; background-color: rgb(150, 150, 150); }
+
+/* ------------------------------------------------------------------------------------------------- toolbar */
+
+.toolbar {
+    flex-direction: row;
+    align-items: center;
+    height: 22px;
+    padding: 0 2px;
+    background-color: rgb(60, 60, 60);
+    border-bottom-width: 1px;
+    border-color: var(--line);
+}
+
+.tool {
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+    padding: 0 7px;
+    font-size: 12px;
+    color: rgb(210, 210, 210);
+    -helix-text-align: middle-center;
+    border-right-width: 1px;
+    border-color: rgb(36, 36, 36);
+}
+
+.tool:hover { background-color: rgb(76, 76, 76); }
+
+.tool--disabled { color: rgb(110, 110, 110); }
+
+.tool--disabled:hover { background-color: rgba(0, 0, 0, 0); }
+
+.tool__text { font-size: 12px; color: rgb(210, 210, 210); }
+
+.tool__arrow, .dropdown__arrow, .inspector-row__arrow {
+    width: 0;
+    height: 0;
+    margin-left: 6px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgb(196, 196, 196);
+}
+
+.tool--toggle { border-width: 1px; border-color: rgb(36, 36, 36); border-radius: 0; margin-left: -1px; }
+
+.tool--on { background-color: rgb(70, 96, 121); color: rgb(238, 238, 238); }
+
+.tool--on:hover { background-color: rgb(80, 108, 136); }
+
+.tool--icon { width: 20px; padding: 0; margin-left: 4px; border-width: 0; font-size: 12px; -helix-font-style: bold; }
+
+.toolbar__fill { flex-grow: 1; }
+
+.toolbar__gap { width: 8px; }
+
+.toolbar__label { font-size: 12px; color: rgb(210, 210, 210); margin-right: 6px; }
+
+.dropdown {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+    height: 18px;
+    padding: 0 6px;
+    background-color: var(--button);
+    border-width: 1px;
+    border-color: rgb(36, 36, 36);
+    border-radius: 3px;
+}
+
+.dropdown:hover { background-color: rgb(100, 100, 100); }
+
+.dropdown__text { font-size: 12px; color: rgb(228, 228, 228); }
+
+/* ------------------------------------------------------------------------------------------------- workspace and panels */
+
+.workspace { flex-grow: 1; }
+
+.graph { position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; background-color: var(--graph); }
+
+.panel {
+    position: absolute;
+    background-color: var(--panel-dark);
+    border-width: 1px;
+    border-color: var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.panel__header { flex-direction: row; align-items: flex-start; padding: 8px 8px 8px 10px; background-color: var(--header); }
+
+.panel__header--plain { padding: 7px 10px; border-bottom-width: 1px; border-color: rgb(35, 35, 35); }
+
+.panel__titles { flex-grow: 1; }
+
+.panel__title { font-size: 14px; color: var(--bright); }
+
+.panel__subtitle { font-size: 11px; color: rgb(118, 118, 118); margin-top: 3px; }
+
+.panel__add { width: 18px; height: 18px; margin-top: 12px; font-size: 18px; -helix-text-align: middle-center; color: rgb(220, 220, 220); }
+
+.panel__add:hover { color: rgb(255, 255, 255); background-color: rgb(74, 74, 74); border-radius: 3px; }
+
+.panel__body { padding: 4px 0 10px 0; }
+
+.blackboard { left: 10px; top: 10px; width: 212px; }
+
+.section__header { flex-direction: row; align-items: center; height: 22px; padding: 0 8px; margin-top: 2px; }
+
+.section__title { font-size: 12px; color: rgb(205, 205, 205); }
+
+.foldout {
+    width: 0;
+    height: 0;
+    margin: 1px 7px 0 2px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 5px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgb(170, 170, 170);
+}
+
+.property { flex-direction: row; align-items: center; height: 26px; padding: 0 8px 0 12px; }
+
+.property:hover { background-color: rgb(52, 52, 52); }
+
+.property__pill {
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+    padding: 0 10px 0 7px;
+    background-color: rgb(70, 70, 70);
+    border-width: 1px;
+    border-color: rgb(33, 33, 33);
+    border-radius: 10px;
+}
+
+.property__dot { width: 6px; height: 6px; border-radius: 3px; margin-right: 6px; }
+
+.property__dot--float { background-color: rgb(132, 228, 231); }
+
+.property__dot--color { background-color: rgb(251, 203, 244); }
+
+.property__dot--texture { background-color: rgb(255, 139, 139); }
+
+.property__dot--keyword { background-color: rgb(148, 129, 230); }
+
+.property__name { font-size: 12px; color: rgb(230, 230, 230); }
+
+.property__type { flex-grow: 1; font-size: 11px; color: rgb(128, 128, 128); -helix-text-align: middle-right; }
+
+.inspector { right: 10px; top: 10px; width: 244px; bottom: 236px; background-color: var(--panel); }
+
+.tabs { flex-direction: row; height: 24px; padding: 0 8px; background-color: rgb(37, 37, 37); }
+
+.tabs__tab { flex-grow: 1; font-size: 12px; -helix-text-align: middle-center; color: rgb(170, 170, 170); }
+
+.tabs__tab:hover { color: rgb(220, 220, 220); }
+
+.tabs__tab--active { color: rgb(235, 235, 235); border-bottom-width: 2px; border-color: rgb(196, 196, 196); }
+
+.inspector__body { padding: 4px 0 8px 0; }
+
+.inspector-heading { flex-direction: row; align-items: center; height: 22px; padding: 0 8px; margin-top: 2px; }
+
+.inspector-heading--foldout { background-color: rgb(52, 52, 52); border-top-width: 1px; border-bottom-width: 1px; border-color: rgb(36, 36, 36); margin-top: 6px; }
+
+.inspector-heading__arrow {
+    width: 0;
+    height: 0;
+    margin: 1px 6px 0 0;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 5px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgb(170, 170, 170);
+}
+
+.inspector-heading__text { font-size: 12px; -helix-font-style: bold; color: rgb(214, 214, 214); }
+
+.inspector-description { font-size: 11px; color: var(--dim); padding: 0 10px 4px 10px; white-space: normal; }
+
+.inspector-row { flex-direction: row; align-items: center; height: 20px; padding: 0 8px 0 18px; }
+
+.inspector-row__name { width: 46%; font-size: 12px; color: rgb(196, 196, 196); }
+
+.inspector-row__value {
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 18px;
+    padding: 0 6px;
+    font-size: 12px;
+    color: rgb(220, 220, 220);
+    -helix-text-align: middle-left;
+    background-color: var(--field);
+    border-width: 1px;
+    border-color: rgb(33, 33, 33);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.inspector-row__text { flex-grow: 1; flex-shrink: 1; font-size: 12px; color: rgb(220, 220, 220); white-space: nowrap; overflow: hidden; }
+
+.inspector-row__value--dropdown { background-color: var(--button); border-color: rgb(36, 36, 36); }
+
+.inspector-row__value--dropdown:hover { background-color: rgb(100, 100, 100); }
+
+.preview { right: 10px; bottom: 10px; width: 244px; height: 216px; }
+
+.preview__view { flex-grow: 1; background-size: cover; }
+
+.status { position: absolute; left: 12px; bottom: 6px; font-size: 11px; color: rgb(110, 110, 110); }
+
+/* ------------------------------------------------------------------------------------------------- the graph */
+
+.graph-content { position: absolute; left: 0; top: 0; width: 1px; height: 1px; transform-origin: 0 0; }
+
+.graph-overlay { position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
+
+.graph-node {
+    position: absolute;
+    min-width: 120px;
+    background-color: rgb(57, 57, 57);
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: var(--line);
+}
+
+.graph-node--selected { border-color: rgb(68, 192, 255); }
+
+.graph-node__title {
+    flex-direction: row;
+    align-items: center;
+    height: 26px;
+    padding: 0 8px 0 9px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.graph-node__title-label { flex-grow: 1; font-size: 12px; color: rgb(212, 212, 212); }
+
+.graph-node__title-arrow {
+    width: 0;
+    height: 0;
+    margin-left: 12px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgb(150, 150, 150);
+}
+
+.graph-node__stripe { height: 5px; }
+
+.graph-node__ports { flex-direction: row; border-top-width: 1px; border-color: rgb(46, 46, 46); }
+
+.graph-node__inputs { flex-grow: 1; padding: 4px 0; background-color: rgb(57, 57, 57); }
+
+.graph-node__inputs--empty { flex-grow: 0; padding: 0; }
+
+.graph-node__outputs {
+    flex-grow: 1;
+    padding: 4px 0;
+    background-color: rgb(43, 43, 43);
+    border-left-width: 1px;
+    border-color: rgb(39, 39, 39);
+}
+
+.graph-port { flex-direction: row; align-items: center; height: 24px; padding: 0 4px; }
+
+.graph-port--output { justify-content: flex-end; }
+
+.graph-port:hover { background-color: rgba(255, 255, 255, 0.04); }
+
+.graph-port__connector {
+    width: 8px;
+    height: 8px;
+    margin: 0 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: rgb(200, 200, 200);
+    background-color: rgb(32, 32, 32);
+}
+
+.graph-port:hover .graph-port__connector { scale: 1.3 1.3; }
+
+.graph-port__label { font-size: 11px; color: rgb(196, 196, 196); padding-right: 6px; }
+
+.graph-port--output .graph-port__label { padding-right: 0; padding-left: 12px; }
+
+.graph-node__preview { height: 122px; background-color: rgb(20, 20, 20); background-size: cover; }
+
+.graph-node__preview-toggle {
+    height: 14px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(57, 57, 57);
+    border-top-width: 1px;
+    border-color: rgb(46, 46, 46);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.graph-node__preview-toggle:hover { background-color: rgb(72, 72, 72); }
+
+.graph-node__chevron {
+    width: 5px;
+    height: 5px;
+    margin-top: -3px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-color: rgb(196, 196, 196);
+    rotate: 45deg;
+}
+
+.graph-node__chevron--up { margin-top: 3px; rotate: -135deg; }
+
+/* A property: a pill of its name and its port. */
+.graph-node--property { min-width: 0; border-radius: 13px; background-color: rgb(57, 57, 57); }
+
+.graph-node__property { flex-direction: row; align-items: center; height: 26px; padding-left: 10px; }
+
+.graph-node__property-dot { width: 6px; height: 6px; border-radius: 3px; margin-right: 7px; background-color: rgb(132, 228, 231); }
+
+.graph-node__property-label { font-size: 12px; color: rgb(220, 220, 220); }
+
+.graph-node--property .graph-port { padding-right: 4px; padding-left: 4px; }
+
+/* The contexts: a stack of blocks under the stage's name. */
+.graph-node--context { min-width: 210px; background-color: rgb(29, 29, 29); border-color: rgb(20, 20, 20); border-radius: 7px; padding-bottom: 6px; }
+
+.graph-node__title--context { height: 30px; padding-left: 10px; }
+
+.graph-node__title--context .graph-node__title-label { font-size: 15px; color: rgb(214, 214, 214); }
+
+.graph-node__blocks { padding: 0 6px; }
+
+.graph-block {
+    flex-direction: row;
+    align-items: center;
+    height: 26px;
+    margin-top: 5px;
+    padding-right: 10px;
+    background-color: rgb(56, 56, 56);
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: rgb(30, 30, 30);
+}
+
+.graph-block .graph-port { height: 24px; padding: 0 0 0 1px; }
+
+.graph-block__label { font-size: 11px; color: rgb(205, 205, 205); }
+
+/* An unconnected input's value, left of the node, wired to its port. */
+.graph-inline {
+    position: absolute;
+    top: 3px;
+    height: 18px;
+    flex-direction: row;
+    background-color: rgb(57, 57, 57);
+    border-width: 1px;
+    border-color: rgb(25, 25, 25);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.graph-inline__field { flex-direction: row; align-items: center; flex-grow: 1; }
+
+.graph-inline__field:hover { background-color: rgb(70, 70, 70); }
+
+.graph-inline__axis {
+    width: 16px;
+    height: 100%;
+    font-size: 10px;
+    -helix-text-align: middle-center;
+    color: rgb(170, 170, 170);
+    background-color: rgb(42, 42, 42);
+    margin-right: 5px;
+}
+
+.graph-inline__value { font-size: 10px; color: rgb(214, 214, 214); }
+
+.graph-inline__swatch { flex-grow: 1; margin: 3px; border-radius: 1px; }
+
+.graph-inline__channel { flex-grow: 1; font-size: 10px; color: rgb(205, 205, 205); padding-left: 6px; -helix-text-align: middle-left; }
+
+.graph-inline__wire { position: absolute; left: -11px; top: 11px; width: 12px; height: 1px; background-color: rgb(120, 120, 120); }
+
+.graph-inline__dot { position: absolute; left: -14px; top: 9px; width: 5px; height: 5px; border-radius: 3px; }
+
+/* The create node menu. */
+.graph-menu {
+    position: absolute;
+    width: 240px;
+    background-color: rgb(46, 46, 46);
+    border-width: 1px;
+    border-color: rgb(20, 20, 20);
+    border-radius: 4px;
+    padding-bottom: 4px;
+}
+
+.graph-menu__title {
+    height: 24px;
+    font-size: 12px;
+    -helix-font-style: bold;
+    -helix-text-align: middle-center;
+    color: rgb(222, 222, 222);
+    background-color: rgb(57, 57, 57);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-width: 1px;
+    border-color: rgb(30, 30, 30);
+}
+
+.graph-menu__search {
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+    margin: 6px;
+    padding: 0 8px;
+    background-color: rgb(42, 42, 42);
+    border-width: 1px;
+    border-color: rgb(28, 28, 28);
+    border-radius: 3px;
+}
+
+.graph-menu__search-icon { width: 7px; height: 7px; border-width: 1px; border-color: rgb(150, 150, 150); border-radius: 4px; margin-right: 6px; }
+
+.graph-menu__search-text { font-size: 11px; color: rgb(120, 120, 120); }
+
+.graph-menu__item { flex-direction: row; align-items: center; height: 22px; padding: 0 10px; }
+
+.graph-menu__item:hover { background-color: rgb(44, 93, 135); }
+
+.graph-menu__item-icon { width: 8px; height: 8px; margin-right: 8px; border-radius: 4px; background-color: rgb(110, 110, 110); }
+
+.graph-menu__item-icon--folder { width: 11px; height: 8px; border-radius: 1px; background-color: rgb(196, 166, 92); }
+
+.graph-menu__item-label { flex-grow: 1; font-size: 12px; color: rgb(222, 222, 222); }
+
+.graph-menu__item-hint { font-size: 10px; color: rgb(130, 130, 130); }
+
+.graph-menu__item-arrow { width: 5px; height: 5px; border-right-width: 1px; border-top-width: 1px; border-color: rgb(170, 170, 170); rotate: 45deg; }
+
+.graph-menu__item-back { width: 5px; height: 5px; margin-right: 10px; border-left-width: 1px; border-bottom-width: 1px; border-color: rgb(170, 170, 170); rotate: 45deg; }

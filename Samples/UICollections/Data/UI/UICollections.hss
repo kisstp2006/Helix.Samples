@@ -26,10 +26,26 @@
 
 .buttons { flex-direction: row; flex-wrap: wrap; }
 
-.chart { height: 200px; margin: 4px 3px; background-color: rgb(20, 22, 27); border-radius: 4px; }
+.card {
+    margin: 4px 3px;
+    background-color: rgb(19, 21, 26);
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgb(44, 47, 55);
+}
 
-.meter { height: 12px; margin: 8px 3px; background-color: rgb(20, 22, 27); border-radius: 6px; }
+.chart { height: 220px; }
 
-.meter-fill { width: 30%; height: 100%; background-color: rgb(88, 166, 255); border-radius: 6px; }
+.donut { height: 150px; }
+
+.meter-row { flex-direction: row; justify-content: space-between; margin: 8px 3px 0 3px; }
+
+.caption { font-size: 11px; color: rgb(150, 154, 166); }
+
+.meter-value { font-size: 11px; color: rgb(222, 224, 230); }
+
+.meter { height: 8px; margin: 4px 3px 6px 3px; background-color: rgb(19, 21, 26); border-radius: 4px; border-width: 1px; border-color: rgb(44, 47, 55); }
+
+.meter-fill { width: 62%; height: 100%; background-color: rgb(88, 166, 255); border-radius: 4px; }
 
 .status { margin: 6px 3px 0 3px; white-space: normal; color: rgb(150, 154, 166); }
