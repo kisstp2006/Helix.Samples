@@ -114,6 +114,12 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
                                  "-DSAMPLE=${sample}" "-DPIPELINE=${pipeline}" "-DMACHINE_FONTS=${machine_fonts}"
                                  "-DGOLDEN=${CMAKE_CURRENT_SOURCE_DIR}/Tests/Golden/${sample}-${pipeline}.png"
                                  "-DOUT=${CMAKE_CURRENT_BINARY_DIR}/shots/${sample}-${pipeline}.png" -P "${runner}")
+                # The .NET runtime (a sample's C# scripts) is never unloaded: LeakSanitizer is told about its modules.
+                if(HELIX_ENABLE_ASAN AND HELIX_PLATFORM STREQUAL "linux")
+                    helix_dependency_dir(samples_scripting_dir Scripting)
+                    set_tests_properties(helix_samples_${sample}_${pipeline} PROPERTIES
+                                         ENVIRONMENT "LSAN_OPTIONS=suppressions=${samples_scripting_dir}/Tests/Support/LeakSuppressions.txt")
+                endif()
             endforeach()
         endforeach()
     endif()
