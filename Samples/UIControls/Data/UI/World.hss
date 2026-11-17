@@ -1,0 +1,25 @@
+/* The world space panel: a card in the scene, a part of it turned about the x axis. */
+
+#world {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: rgba(28, 30, 36, 0.95);
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: rgb(74, 144, 226);
+}
+
+.title { font-size: 18px; -helix-font-style: bold; margin-bottom: 6px; }
+
+#world .helix-base-field__label { min-width: 70px; width: 70px; }
+
+.world-row { flex-direction: row; align-items: center; }
+
+.tilted {
+    margin-top: 8px;
+    padding: 6px;
+    align-self: center;
+    background-color: rgb(74, 144, 226);
+    border-radius: 6px;
+    rotate: x 35deg;
+}

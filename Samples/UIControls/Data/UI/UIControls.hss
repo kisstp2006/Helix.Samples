@@ -1,0 +1,32 @@
+/* The controls sample's layout: two columns of controls in Helix's default theme, room on the right where the world
+   space panel shows in the scene. */
+
+#page { flex-grow: 1; flex-direction: row; padding: 10px; }
+
+.column {
+    width: 300px;
+    margin-right: 10px;
+    padding: 6px;
+    background-color: rgba(28, 30, 36, 0.92);
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgb(20, 21, 25);
+}
+
+.heading { font-size: 18px; -helix-font-style: bold; margin: 0 0 4px 3px; color: rgb(222, 224, 230); }
+
+.buttons { flex-direction: row; flex-wrap: wrap; }
+
+#tabs { flex-grow: 1; }
+
+.scroll { height: 90px; flex-grow: 0; margin: 4px 3px; }
+
+.split { height: 60px; flex-grow: 0; margin: 4px 3px; }
+
+.pane { padding: 6px; background-color: rgb(50, 53, 60); }
+
+.status { margin: 6px 3px 0 3px; color: rgb(150, 154, 166); }
+
+.world-caption { flex-grow: 1; align-items: center; justify-content: flex-end; padding-bottom: 8px; }
+
+.world-caption .helix-label { color: rgb(150, 154, 166); }

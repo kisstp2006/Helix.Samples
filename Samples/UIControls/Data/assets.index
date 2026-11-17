@@ -1,0 +1,8 @@
+# The sample's data folder: every file, its guid and its path (Tools/GenerateData.py).
+b7189973fd32581edbddd28e1bb9e71f Scenes/UIControls.helix
+15c07177c6d2648ac344e9f3204e2353 Scripts/UIControlsDemo.asset
+de7d58c2249fc6bc9839d474ea7aea31 Scripts/UIView.asset
+057582d66b588850586a8adee0c456d9 UI/UIControls.hss
+908659f1a1279006b2e37fc57ee07470 UI/UIControls.hxml
+50445a139060833d49515a016da86e2f UI/World.hss
+a801d249c461479a6552185cf69cb855 UI/World.hxml

@@ -1,0 +1,14 @@
+<HXML>
+  <Style src="World.hss"/>
+  <Element name="world">
+    <Label class="title" text="In the world"/>
+    <TextField name="world-text" label="Name" value="Type here"/>
+    <Toggle label="Toggle" value="true"/>
+    <Slider label="Slider" low-value="0" high-value="1" value="0.3" fill="true"/>
+    <Element class="world-row">
+      <Button name="world-button" text="Click me"/>
+      <Label name="world-count" text="0 clicks"/>
+    </Element>
+    <Element class="tilted"><Label text="Turned in 3D"/></Element>
+  </Element>
+</HXML>

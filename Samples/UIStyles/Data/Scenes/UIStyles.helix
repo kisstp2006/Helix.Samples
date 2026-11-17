@@ -6,6 +6,7 @@ GameObject:
   - component: {fileID: 101}
   - component: {fileID: 102}
   m_Name: Main Camera
+  m_TagString: MainCamera
   m_IsActive: 1
 --- !h!4 &101
 Transform:

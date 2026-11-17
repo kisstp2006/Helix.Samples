@@ -18,7 +18,8 @@ HEADER = "%YAML 1.1\n%TAG !h! tag:helixengine,2026:\n"
 # The script classes the samples' scenes use: (asset name, module or assembly, namespace, class); the C++ UIView in
 # every sample, a sample's own C# classes beside it.
 SCRIPTS = [("UIView", "HelixUI", "HelixEngine.UI", "UIView")]
-SAMPLE_SCRIPTS = {"UIElements": [("UIElementsDemo", "HelixSamples.UIElements", "HelixSamples", "UIElementsDemo")]}
+SAMPLE_SCRIPTS = {"UIElements": [("UIElementsDemo", "HelixSamples.UIElements", "HelixSamples", "UIElementsDemo")],
+                  "UIControls": [("UIControlsDemo", "HelixSamples.UIControls", "HelixSamples", "UIControlsDemo")]}
 
 # The fileID of the main object of a script asset (a MonoBehaviour's class ID times 100000).
 MAIN_SCRIPT_OBJECT = 11400000
@@ -170,7 +171,8 @@ IMAGES = {"UIRender": [("Images/Landscape.png", 192, 112, landscape), ("Images/A
 
 # The C# components of a sample's UI object: their script asset and serialized fields (assets of the folder).
 SAMPLE_COMPONENTS = {"UIElements": [("Scripts/UIElementsDemo.asset", [("rowTemplate", "UI/Row.hxml"), ("darkTheme", "UI/Dark.hss"),
-                                                                     ("lightTheme", "UI/Light.hss")])]}
+                                                                     ("lightTheme", "UI/Light.hss")])],
+                     "UIControls": [("Scripts/UIControlsDemo.asset", [("worldTemplate", "UI/World.hxml")])]}
 
 # Images in a UI: readable (into the UI's atlas), their bytes as they are, no mipmaps, clamped.
 IMAGE_META = ("TextureImporter:\n  mipmaps:\n    enableMipMap: 0\n  sRGBTexture: 0\n  isReadable: 1\n"
@@ -194,7 +196,7 @@ def ui_scene(sample, markup, background):
     components = SAMPLE_COMPONENTS.get(sample, [])
     out = [HEADER]
     out.append("--- !h!1 &100\nGameObject:\n  m_Component:\n  - component: {fileID: 101}\n  - component: {fileID: 102}\n"
-               "  m_Name: Main Camera\n  m_IsActive: 1\n")
+               "  m_Name: Main Camera\n  m_TagString: MainCamera\n  m_IsActive: 1\n")
     out.append("--- !h!4 &101\nTransform:\n  m_GameObject: {fileID: 100}\n  m_Children: []\n  m_Father: {fileID: 0}\n")
     out.append(f"--- !h!20 &102\nCamera:\n  m_GameObject: {{fileID: 100}}\n  m_Enabled: 1\n  m_ClearFlags: 2\n"
                f"  m_BackGroundColor: {color(background)}\n")
@@ -219,7 +221,8 @@ SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.
                ("UIRender", "Helix Samples - UI Rendering", "UI/UIRender.hxml", (0.08, 0.09, 0.11, 1)),
                ("UIInput", "Helix Samples - UI Input", "UI/UIInput.hxml", (0.08, 0.09, 0.11, 1)),
                ("UIStyles", "Helix Samples - UI Styles", "UI/UIStyles.hxml", (0.08, 0.09, 0.11, 1)),
-               ("UIElements", "Helix Samples - UI Element Types", "UI/UIElements.hxml", (0.08, 0.09, 0.11, 1))]
+               ("UIElements", "Helix Samples - UI Element Types", "UI/UIElements.hxml", (0.08, 0.09, 0.11, 1)),
+               ("UIControls", "Helix Samples - UI Controls", "UI/UIControls.hxml", (0.11, 0.13, 0.17, 1))]
 
 
 def main():

@@ -1,0 +1,66 @@
+<HXML>
+  <Style src="UIControls.hss"/>
+  <Element name="page">
+    <Element class="column">
+      <Label class="heading" text="Controls"/>
+      <Element class="buttons">
+        <Button name="button" text="Button"/>
+        <RepeatButton name="repeat" text="Hold me" delay="300" interval="80"/>
+        <Button text="Disabled" enabled="false"/>
+      </Element>
+      <Toggle name="toggle" label="Toggle" text="Shadows" value="true"/>
+      <GroupBox text="Quality">
+        <RadioButton label="Low"/>
+        <RadioButton label="High" value="true"/>
+      </GroupBox>
+      <RadioButtonGroup label="Radio group" choices="Small, Medium, Large" value="1"/>
+      <ToggleButtonGroup label="Align" is-multiple-selection="false">
+        <Button text="Left"/>
+        <Button text="Center"/>
+        <Button text="Right"/>
+      </ToggleButtonGroup>
+      <Slider name="slider" label="Slider" low-value="0" high-value="100" value="60" fill="true"/>
+      <SliderInt label="Slider int" low-value="0" high-value="10" value="4"/>
+      <MinMaxSlider label="Min max" min-value="20" max-value="70" low-limit="0" high-limit="100"/>
+      <ProgressBar name="progress" value="60" title="Progress"/>
+      <HelpBox text="Every control here is a C++ class; the theme is Helix's default." message-type="Info"/>
+      <HelpBox text="A warning with its icon." message-type="Warning"/>
+    </Element>
+    <Element class="column">
+      <TabView name="tabs">
+        <Tab label="Fields">
+          <TextField label="Text" value="Helix"/>
+          <TextField label="Password" value="secret" password="true"/>
+          <IntegerField label="Integer" value="42"/>
+          <FloatField label="Float" value="3.25"/>
+          <Vector3Field label="Vector3" x="1" y="2.5" z="-3"/>
+          <RectIntField label="Rect int" x="0" y="0" z="64" w="32"/>
+          <DropdownField label="Dropdown" choices="Forward, Deferred, Forward+" index="2"/>
+          <MaskField label="Mask" choices="Opaque, Transparent, UI" value="5"/>
+          <Hash128Field label="Hash"/>
+          <GroupBox name="from-csharp" text="From C#"/>
+        </Tab>
+        <Tab label="Containers">
+          <Foldout text="Foldout" value="true">
+            <Label text="The content of the foldout."/>
+          </Foldout>
+          <ScrollView class="scroll">
+            <Label text="Line 1"/><Label text="Line 2"/><Label text="Line 3"/><Label text="Line 4"/>
+            <Label text="Line 5"/><Label text="Line 6"/><Label text="Line 7"/><Label text="Line 8"/>
+          </ScrollView>
+          <TwoPaneSplitView class="split" fixed-pane-initial-dimension="120">
+            <Label class="pane" text="Fixed"/>
+            <Label class="pane" text="Flexed"/>
+          </TwoPaneSplitView>
+          <PopupWindow text="Popup window">
+            <Label text="Its content."/>
+          </PopupWindow>
+        </Tab>
+      </TabView>
+      <Label name="status" class="status" text="Change a control"/>
+    </Element>
+    <Element class="world-caption">
+      <Label text="A panel in the world"/>
+    </Element>
+  </Element>
+</HXML>
