@@ -1,0 +1,13 @@
+The images of UIImmediate
+
+Data/Images/*.png are the sample's own, drawn by Tools/GenerateData.py.
+
+Data/Images/CC0/ holds art released under Creative Commons Zero (CC0 1.0, public domain dedication,
+https://creativecommons.org/publicdomain/zero/1.0/), put there by Tools/PrepareImages.py:
+
+  KenneyPanda.png, KenneyPenguin.png, KenneyOwl.png, KenneyRabbit.png, KenneyNarwhal.png, KenneyFrog.png
+      Animal Pack Redux by Kenney (www.kenney.nl), https://opengameart.org/content/animal-pack-redux
+      (kenney_animalPackRedux.zip)
+  KenneyIconGear.png, KenneyIconTrophy.png, KenneyIconMedal.png, KenneyIconSound.png, KenneyIconMusic.png,
+  KenneyIconWrench.png
+      Game icons by Kenney (www.kenney.nl), https://opengameart.org/content/game-icons (Kenney_gameIcons.zip)

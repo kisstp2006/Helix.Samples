@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !h! tag:helixengine,2026:
+--- !h!1 &100
+GameObject:
+  m_Component:
+  - component: {fileID: 101}
+  - component: {fileID: 102}
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_IsActive: 1
+--- !h!4 &101
+Transform:
+  m_GameObject: {fileID: 100}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !h!20 &102
+Camera:
+  m_GameObject: {fileID: 100}
+  m_Enabled: 1
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.1, g: 0.11, b: 0.14, a: 1}
+--- !h!1 &110
+GameObject:
+  m_Component:
+  - component: {fileID: 111}
+  - component: {fileID: 112}
+  - component: {fileID: 113}
+  - component: {fileID: 114}
+  m_Name: UI
+  m_IsActive: 1
+--- !h!4 &111
+Transform:
+  m_GameObject: {fileID: 110}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !h!114 &112
+GameBehaviour:
+  m_GameObject: {fileID: 110}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: bc0cb92480aae2725e7358907f8634ba, type: 3}
+  m_Source: {fileID: 11400000, guid: 1ebbfd9006958d7b00801488296220a6, type: 3}
+  m_SortingOrder: 0
+  m_WatchFiles: 1
+--- !h!114 &113
+GameBehaviour:
+  m_GameObject: {fileID: 110}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 8498b97ad844b3ed972a98e8f0c6d0fe, type: 3}
+  star: {fileID: 2800000, guid: 975edcec69b4f4b79be953958169bcdd, type: 3}
+  avatar: {fileID: 2800000, guid: b06edd7c90f1c99c7ee06cbadab8b4e8, type: 3}
+  frame: {fileID: 2800000, guid: 1950d3f8fc8bd54ee1f3a2dc1cc382cc, type: 3}
+  panda: {fileID: 2800000, guid: 9d1c20e064aeb88308dfc72aad7c0433, type: 3}
+  penguin: {fileID: 2800000, guid: fe9749b38d48786c14871f9d5cd69ed6, type: 3}
+  owl: {fileID: 2800000, guid: b8a7f606f9afaa64bcc39a8e3101b525, type: 3}
+  rabbit: {fileID: 2800000, guid: d4f5ddf44c10dd734f3ce5cab3a6f6fb, type: 3}
+  narwhal: {fileID: 2800000, guid: 18846c8fc29835d73fdf43910d2026df, type: 3}
+  frog: {fileID: 2800000, guid: 9fe917a787a945a2d8fc8b2e9b8a7292, type: 3}
+  gear: {fileID: 2800000, guid: 9cc7b808af3b3e4ca0e34d3b26c1d569, type: 3}
+  trophy: {fileID: 2800000, guid: e8fb5921ce1438c6075f9beef4ed2022, type: 3}
+  medal: {fileID: 2800000, guid: 947e3c86ebf31d79e4850fdf1f556e64, type: 3}
+  sound: {fileID: 2800000, guid: 5ed06592ec107a1e594dc06629cf0b3f, type: 3}
+  music: {fileID: 2800000, guid: 7daf013d74249f63dd8d02fc266ec4a3, type: 3}
+  wrench: {fileID: 2800000, guid: 66e95e1c322ab8571c648c2e98619e53, type: 3}
+--- !h!114 &114
+GameBehaviour:
+  m_GameObject: {fileID: 110}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: c78ee3740cfa8d1df0a5dad137c82b60, type: 3}

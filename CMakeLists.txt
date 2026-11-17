@@ -42,6 +42,7 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         "${samples_ui_engine_source}/Helix/UI/Engine/TemplateContainer.h")
     helix_bindgen(helix_samples MODULE HelixSamples NAMESPACE HelixSamples KIND NativeGame
                   HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Elements/Gauge.h" "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Scripts/UIControlsCpp.h"
+                          "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Scripts/UIImmediateCpp.h"
                   REFERENCES ${samples_references} REFERENCE_NAMESPACE HelixEngine
                   INCLUDE_ROOTS "${CMAKE_CURRENT_SOURCE_DIR}/Source" "${samples_engine_source}" "${samples_math_dir}/Source"
                                 "${samples_ui_engine_source}" "${samples_ui_dir}/Source")
@@ -102,8 +103,8 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         set(runner "${CMAKE_CURRENT_SOURCE_DIR}/Tests/RunSample.cmake")
         # Samples drawn with the machine's fonts (MACHINE_FONTS) run everywhere but compare their screenshots only
         # where the goldens were made (not on CI, whose fonts differ).
-        set(machine_font_samples UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph)
-        foreach(sample IN ITEMS UILayout UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph)
+        set(machine_font_samples UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph UIImmediate)
+        foreach(sample IN ITEMS UILayout UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph UIImmediate)
             set(machine_fonts 0)
             if(sample IN_LIST machine_font_samples)
                 set(machine_fonts 1)

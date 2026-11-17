@@ -1,0 +1,25 @@
+/* The page under the immediate GUI: a backdrop of tiles the windows float over. */
+
+#page { flex-grow: 1; padding: 64px 16px 16px 16px; }
+
+.backdrop {
+    flex-grow: 1;
+    padding: 12px 16px;
+    background-color: rgba(30, 34, 44, 0.85);
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: rgb(46, 52, 66);
+}
+
+.title { font-size: 20px; -helix-font-style: bold; color: rgb(226, 230, 238); }
+
+.note { margin-top: 4px; white-space: normal; color: rgb(150, 158, 176); }
+
+.tiles { flex-direction: row; flex-grow: 1; margin-top: 12px; }
+
+.tile { flex-grow: 1; margin-right: 10px; border-radius: 6px; }
+
+.one { background-color: rgb(52, 92, 160); }
+.two { background-color: rgb(60, 130, 96); }
+.three { background-color: rgb(170, 122, 50); }
+.four { background-color: rgb(150, 66, 96); margin-right: 0; }

@@ -1,0 +1,15 @@
+<HXML>
+  <Style src="UIImmediate.hss"/>
+  <Element name="page">
+    <Element class="backdrop">
+      <Label class="title" text="A UI panel under the immediate GUI"/>
+      <Label class="note" text="This page is markup and styles (a UIView). The HUD, the windows and the dock over it are drawn each frame by OnGui: the C# script's (Samples/UIImmediate/Scripts) and the launcher's C++ script's. Drag a window by its title; the one clicked comes to the front."/>
+      <Element class="tiles">
+        <Element class="tile one"/>
+        <Element class="tile two"/>
+        <Element class="tile three"/>
+        <Element class="tile four"/>
+      </Element>
+    </Element>
+  </Element>
+</HXML>

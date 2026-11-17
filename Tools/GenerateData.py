@@ -22,10 +22,13 @@ SAMPLE_SCRIPTS = {"UIElements": [("UIElementsDemo", "HelixSamples.UIElements", "
                   "UIControls": [("UIControlsDemo", "HelixSamples.UIControls", "HelixSamples", "UIControlsDemo"),
                                  ("UIControlsCpp", "HelixSamples", "HelixSamples", "UIControlsCpp")],
                   "UICollections": [("UICollectionsDemo", "HelixSamples.UICollections", "HelixSamples", "UICollectionsDemo")],
-                  "UIBinding": [("UIBindingDemo", "HelixSamples.UIBinding", "HelixSamples", "UIBindingDemo")]}
+                  "UIBinding": [("UIBindingDemo", "HelixSamples.UIBinding", "HelixSamples", "UIBindingDemo")],
+                  "UIImmediate": [("UIImmediateDemo", "HelixSamples.UIImmediate", "HelixSamples", "UIImmediateDemo"),
+                                  ("UIImmediateCpp", "HelixSamples", "HelixSamples", "UIImmediateCpp")]}
 
-# The fileID of the main object of a script asset (a MonoBehaviour's class ID times 100000).
+# The fileID of the main object of a script asset (a MonoBehaviour's class ID times 100000), and of an image's texture.
 MAIN_SCRIPT_OBJECT = 11400000
+MAIN_TEXTURE_OBJECT = 2800000
 
 
 def guid(sample, path):
@@ -170,14 +173,24 @@ def cursor(x, y):
 IMAGES = {"UIRender": [("Images/Landscape.png", 192, 112, landscape), ("Images/Avatar.png", 96, 96, avatar),
                        ("Images/Frame.png", 48, 48, frame), ("Images/Star.png", 32, 32, star)],
           "UIStyles": [("Images/Landscape.png", 192, 112, landscape), ("Images/Star.png", 32, 32, star),
-                       ("Images/Checker.png", 20, 20, checker), ("Images/Cursor.png", 24, 24, cursor)]}
+                       ("Images/Checker.png", 20, 20, checker), ("Images/Cursor.png", 24, 24, cursor)],
+          "UIImmediate": [("Images/Star.png", 32, 32, star), ("Images/Avatar.png", 96, 96, avatar), ("Images/Frame.png", 48, 48, frame)]}
 
 # The C# components of a sample's UI object: their script asset and serialized fields (assets of the folder).
 SAMPLE_COMPONENTS = {"UIElements": [("Scripts/UIElementsDemo.asset", [("rowTemplate", "UI/Row.hxml"), ("darkTheme", "UI/Dark.hss"),
                                                                      ("lightTheme", "UI/Light.hss")])],
                      "UIControls": [("Scripts/UIControlsDemo.asset", [("worldTemplate", "UI/World.hxml")]), ("Scripts/UIControlsCpp.asset", [])],
                      "UICollections": [("Scripts/UICollectionsDemo.asset", [])],
-                     "UIBinding": [("Scripts/UIBindingDemo.asset", [])]}
+                     "UIBinding": [("Scripts/UIBindingDemo.asset", [])],
+                     "UIImmediate": [("Scripts/UIImmediateDemo.asset", [("star", "Images/Star.png"), ("avatar", "Images/Avatar.png"),
+                                                                       ("frame", "Images/Frame.png"), ("panda", "Images/CC0/KenneyPanda.png"),
+                                                                       ("penguin", "Images/CC0/KenneyPenguin.png"), ("owl", "Images/CC0/KenneyOwl.png"),
+                                                                       ("rabbit", "Images/CC0/KenneyRabbit.png"), ("narwhal", "Images/CC0/KenneyNarwhal.png"),
+                                                                       ("frog", "Images/CC0/KenneyFrog.png"), ("gear", "Images/CC0/KenneyIconGear.png"),
+                                                                       ("trophy", "Images/CC0/KenneyIconTrophy.png"), ("medal", "Images/CC0/KenneyIconMedal.png"),
+                                                                       ("sound", "Images/CC0/KenneyIconSound.png"), ("music", "Images/CC0/KenneyIconMusic.png"),
+                                                                       ("wrench", "Images/CC0/KenneyIconWrench.png")]),
+                                     ("Scripts/UIImmediateCpp.asset", [])]}
 
 # Images in a UI: readable (into the UI's atlas), their bytes as they are, no mipmaps, clamped.
 IMAGE_META = ("TextureImporter:\n  mipmaps:\n    enableMipMap: 0\n  sRGBTexture: 0\n  isReadable: 1\n"
@@ -214,7 +227,8 @@ def ui_scene(sample, markup, background):
                f"  m_Source: {{fileID: {MAIN_SCRIPT_OBJECT}, guid: {guid(sample, markup)}, type: 3}}\n"
                f"  m_SortingOrder: 0\n  m_WatchFiles: 1\n")
     for i, (script, fields) in enumerate(components):
-        values = "".join(f"  {name}: {{fileID: {MAIN_SCRIPT_OBJECT}, guid: {guid(sample, path)}, type: 3}}\n" for name, path in fields)
+        values = "".join(f"  {name}: {{fileID: {MAIN_TEXTURE_OBJECT if path.endswith('.png') else MAIN_SCRIPT_OBJECT}, "
+                         f"guid: {guid(sample, path)}, type: 3}}\n" for name, path in fields)
         out.append(f"--- !h!114 &{113 + i}\nGameBehaviour:\n  m_GameObject: {{fileID: 110}}\n  m_Enabled: 1\n"
                    f"  m_Script: {{fileID: 11500000, guid: {guid(sample, script)}, type: 3}}\n" + values)
     return "".join(out)
@@ -230,7 +244,8 @@ SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.
                ("UIControls", "Helix Samples - UI Controls", "UI/UIControls.hxml", (0.11, 0.13, 0.17, 1)),
                ("UICollections", "Helix Samples - UI Collections", "UI/UICollections.hxml", (0.11, 0.13, 0.17, 1)),
                ("UIBinding", "Helix Samples - UI Data Binding", "UI/UIBinding.hxml", (0.11, 0.13, 0.17, 1)),
-               ("UINodeGraph", "Helix Samples - UI Node Graph", "UI/UINodeGraph.hxml", (0.13, 0.13, 0.13, 1))]
+               ("UINodeGraph", "Helix Samples - UI Node Graph", "UI/UINodeGraph.hxml", (0.13, 0.13, 0.13, 1)),
+               ("UIImmediate", "Helix Samples - Immediate GUI", "UI/UIImmediate.hxml", (0.1, 0.11, 0.14, 1))]
 
 
 def main():

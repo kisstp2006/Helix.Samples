@@ -1,0 +1,22 @@
+# The sample's data folder: every file, its guid and its path (Tools/GenerateData.py).
+b06edd7c90f1c99c7ee06cbadab8b4e8 Images/Avatar.png
+9fe917a787a945a2d8fc8b2e9b8a7292 Images/CC0/KenneyFrog.png
+9cc7b808af3b3e4ca0e34d3b26c1d569 Images/CC0/KenneyIconGear.png
+947e3c86ebf31d79e4850fdf1f556e64 Images/CC0/KenneyIconMedal.png
+7daf013d74249f63dd8d02fc266ec4a3 Images/CC0/KenneyIconMusic.png
+5ed06592ec107a1e594dc06629cf0b3f Images/CC0/KenneyIconSound.png
+e8fb5921ce1438c6075f9beef4ed2022 Images/CC0/KenneyIconTrophy.png
+66e95e1c322ab8571c648c2e98619e53 Images/CC0/KenneyIconWrench.png
+18846c8fc29835d73fdf43910d2026df Images/CC0/KenneyNarwhal.png
+b8a7f606f9afaa64bcc39a8e3101b525 Images/CC0/KenneyOwl.png
+9d1c20e064aeb88308dfc72aad7c0433 Images/CC0/KenneyPanda.png
+fe9749b38d48786c14871f9d5cd69ed6 Images/CC0/KenneyPenguin.png
+d4f5ddf44c10dd734f3ce5cab3a6f6fb Images/CC0/KenneyRabbit.png
+1950d3f8fc8bd54ee1f3a2dc1cc382cc Images/Frame.png
+975edcec69b4f4b79be953958169bcdd Images/Star.png
+8835b82de5c4e8afd4d64c2c4740d39d Scenes/UIImmediate.helix
+c78ee3740cfa8d1df0a5dad137c82b60 Scripts/UIImmediateCpp.asset
+8498b97ad844b3ed972a98e8f0c6d0fe Scripts/UIImmediateDemo.asset
+bc0cb92480aae2725e7358907f8634ba Scripts/UIView.asset
+0892209f2b2d179f5a7b178d74db5e55 UI/UIImmediate.hss
+1ebbfd9006958d7b00801488296220a6 UI/UIImmediate.hxml

@@ -28,6 +28,18 @@ IMAGES = [
     ("animals", "PNG/Round/panda.png", "UIRender", "Images/CC0/KenneyPanda.png"),
     ("animals", "PNG/Round/penguin.png", "UIRender", "Images/CC0/KenneyPenguin.png"),
     ("landscape", "", "UIRender", "Images/CC0/PolyHavenAlpsField.png"),
+    ("animals", "PNG/Round/panda.png", "UIImmediate", "Images/CC0/KenneyPanda.png"),
+    ("animals", "PNG/Round/penguin.png", "UIImmediate", "Images/CC0/KenneyPenguin.png"),
+    ("animals", "PNG/Round/owl.png", "UIImmediate", "Images/CC0/KenneyOwl.png"),
+    ("animals", "PNG/Round/rabbit.png", "UIImmediate", "Images/CC0/KenneyRabbit.png"),
+    ("animals", "PNG/Round/narwhal.png", "UIImmediate", "Images/CC0/KenneyNarwhal.png"),
+    ("animals", "PNG/Round/frog.png", "UIImmediate", "Images/CC0/KenneyFrog.png"),
+    ("icons", "PNG/White/2x/gear.png", "UIImmediate", "Images/CC0/KenneyIconGear.png"),
+    ("icons", "PNG/White/2x/trophy.png", "UIImmediate", "Images/CC0/KenneyIconTrophy.png"),
+    ("icons", "PNG/White/2x/medal1.png", "UIImmediate", "Images/CC0/KenneyIconMedal.png"),
+    ("icons", "PNG/White/2x/audioOn.png", "UIImmediate", "Images/CC0/KenneyIconSound.png"),
+    ("icons", "PNG/White/2x/musicOn.png", "UIImmediate", "Images/CC0/KenneyIconMusic.png"),
+    ("icons", "PNG/White/2x/wrench.png", "UIImmediate", "Images/CC0/KenneyIconWrench.png"),
 ]
 
 
