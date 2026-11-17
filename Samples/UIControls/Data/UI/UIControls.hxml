@@ -39,6 +39,7 @@
           <MaskField label="Mask" choices="Opaque, Transparent, UI" value="5"/>
           <Hash128Field label="Hash"/>
           <GroupBox name="from-csharp" text="From C#"/>
+          <GroupBox name="from-cpp" text="From C++"/>
         </Tab>
         <Tab label="Containers">
           <Foldout text="Foldout" value="true">

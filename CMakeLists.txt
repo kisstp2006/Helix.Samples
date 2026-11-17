@@ -25,7 +25,7 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
     # The samples' data folders are read where they are, so an edit of a sample's files shows while it runs.
     target_compile_definitions(helix_samples PRIVATE "HELIX_SAMPLES_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/Samples\"")
 
-    # The launcher's game module HelixSamples: its C++ element types (Gauge), registered with the UI like a game's.
+    # The launcher's game module HelixSamples: its C++ element types (Gauge) and scripts (UIControlsCpp), registered like a game's.
     helix_dependency_dir(samples_engine_dir Engine)
     helix_dependency_dir(samples_ui_dir UI)
     helix_dependency_dir(samples_math_dir Math)
@@ -41,7 +41,7 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         "${samples_ui_engine_source}/Helix/UI/Engine/FontAsset.h" "${samples_ui_engine_source}/Helix/UI/Engine/UIView.h"
         "${samples_ui_engine_source}/Helix/UI/Engine/TemplateContainer.h")
     helix_bindgen(helix_samples MODULE HelixSamples NAMESPACE HelixSamples KIND NativeGame
-                  HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Elements/Gauge.h"
+                  HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Elements/Gauge.h" "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Scripts/UIControlsCpp.h"
                   REFERENCES ${samples_references} REFERENCE_NAMESPACE HelixEngine
                   INCLUDE_ROOTS "${CMAKE_CURRENT_SOURCE_DIR}/Source" "${samples_engine_source}" "${samples_math_dir}/Source"
                                 "${samples_ui_engine_source}" "${samples_ui_dir}/Source")

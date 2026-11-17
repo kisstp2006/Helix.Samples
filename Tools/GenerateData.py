@@ -19,7 +19,8 @@ HEADER = "%YAML 1.1\n%TAG !h! tag:helixengine,2026:\n"
 # every sample, a sample's own C# classes beside it.
 SCRIPTS = [("UIView", "HelixUI", "HelixEngine.UI", "UIView")]
 SAMPLE_SCRIPTS = {"UIElements": [("UIElementsDemo", "HelixSamples.UIElements", "HelixSamples", "UIElementsDemo")],
-                  "UIControls": [("UIControlsDemo", "HelixSamples.UIControls", "HelixSamples", "UIControlsDemo")],
+                  "UIControls": [("UIControlsDemo", "HelixSamples.UIControls", "HelixSamples", "UIControlsDemo"),
+                                 ("UIControlsCpp", "HelixSamples", "HelixSamples", "UIControlsCpp")],
                   "UICollections": [("UICollectionsDemo", "HelixSamples.UICollections", "HelixSamples", "UICollectionsDemo")],
                   "UIBinding": [("UIBindingDemo", "HelixSamples.UIBinding", "HelixSamples", "UIBindingDemo")]}
 
@@ -174,7 +175,7 @@ IMAGES = {"UIRender": [("Images/Landscape.png", 192, 112, landscape), ("Images/A
 # The C# components of a sample's UI object: their script asset and serialized fields (assets of the folder).
 SAMPLE_COMPONENTS = {"UIElements": [("Scripts/UIElementsDemo.asset", [("rowTemplate", "UI/Row.hxml"), ("darkTheme", "UI/Dark.hss"),
                                                                      ("lightTheme", "UI/Light.hss")])],
-                     "UIControls": [("Scripts/UIControlsDemo.asset", [("worldTemplate", "UI/World.hxml")])],
+                     "UIControls": [("Scripts/UIControlsDemo.asset", [("worldTemplate", "UI/World.hxml")]), ("Scripts/UIControlsCpp.asset", [])],
                      "UICollections": [("Scripts/UICollectionsDemo.asset", [])],
                      "UIBinding": [("Scripts/UIBindingDemo.asset", [])]}
 

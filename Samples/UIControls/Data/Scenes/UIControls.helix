@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 111}
   - component: {fileID: 112}
   - component: {fileID: 113}
+  - component: {fileID: 114}
   m_Name: UI
   m_IsActive: 1
 --- !h!4 &111
@@ -46,3 +47,8 @@ GameBehaviour:
   m_Enabled: 1
   m_Script: {fileID: 11500000, guid: 15c07177c6d2648ac344e9f3204e2353, type: 3}
   worldTemplate: {fileID: 11400000, guid: a801d249c461479a6552185cf69cb855, type: 3}
+--- !h!114 &114
+GameBehaviour:
+  m_GameObject: {fileID: 110}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 8882592ac2f0da8657beebdad8e58e53, type: 3}
