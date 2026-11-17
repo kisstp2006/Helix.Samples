@@ -1,0 +1,27 @@
+/* The binding sample's layout: the bound form on the left, what the object holds on the right. */
+
+#page { flex-grow: 1; flex-direction: row; padding: 10px; }
+
+.column {
+    width: 330px;
+    margin-right: 10px;
+    padding: 6px;
+    background-color: rgba(28, 30, 36, 0.92);
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgb(20, 21, 25);
+}
+
+.heading { font-size: 18px; -helix-font-style: bold; margin: 0 0 4px 3px; color: rgb(222, 224, 230); }
+
+.subheading { margin: 2px 3px 2px 3px; color: rgb(150, 154, 166); }
+
+.stats { margin: 6px 0; padding: 4px 0; border-top-width: 1px; border-bottom-width: 1px; border-color: rgb(50, 53, 60); }
+
+.buttons { flex-direction: row; flex-wrap: wrap; margin-top: 4px; }
+
+.caption { font-size: 11px; margin: 8px 3px 0 3px; color: rgb(150, 154, 166); }
+
+.value { font-size: 16px; margin: 2px 3px; color: rgb(222, 224, 230); white-space: normal; }
+
+.status { margin: 12px 3px 0 3px; white-space: normal; color: rgb(150, 154, 166); }

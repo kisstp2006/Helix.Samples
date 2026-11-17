@@ -12,6 +12,8 @@ Samples of the Helix engine, run by a launcher: the player with both render pipe
 | `UIStyles` | Styles: tiles turned, scaled and moved (back with a transition on hover), a turned box that clips its children, backgrounds repeated, spaced, rounded, placed and contained, text with a shadow and an outline, the ellipsis at the end, the start and the middle, cursors (a link shape, an image), and a theme (`.tss`) that imports the sheet of the look. Its images are its own beside CC0 art of Kenney and Poly Haven (`Samples/UIStyles/CREDITS.txt`). |
 | `UIElements` | Element types of scripts: `StatCard`, a C# class (`Samples/UIElements/Scripts`) with attributes from markup and its own content container, holding `Gauge`, a C++ class of the launcher's game module; a C# script clones rows from a template into a list and switches the theme sheet on the root. |
 | `UIControls` | The controls in Helix's default theme: buttons, a repeat button, toggles, radio buttons and groups, a toggle button group, sliders, a progress bar, help boxes; text, password, number, vector and rect fields, a dropdown, a mask field, a hash field; a foldout, a scroll view, a split view, a popup window in tabs; controls made from C# (`Samples/UIControls/Scripts`) that show each change in the status line; a panel of world space settings in the scene, clicked and typed into through the main camera, with a part turned in 3D. |
+| `UICollections` | Collections, menus and painting from C# (`Samples/UICollections/Scripts`): a list of 500 items (only the rows in view are made) with a foldout header, an add/remove footer, multiple selection and rows moved by dragging, a contextual menu on its rows; a tree of a scene's objects; a table of assets in three columns that sorts, resizes and hides its columns from the header; a dropdown menu, tooltips; a chart drawn by `generateVisualContent` with `Painter2D` (bars, a line, text and a vector image) whose bars grow in with an animation, and a meter animated by its style values. |
+| `UIBinding` | Data binding: a character sheet (`Samples/UIBinding/Scripts`) as the page's data source; fields bound both ways in markup (`<Bindings>`, a section of its own `data-source-path`), a label through a converter group, a progress bar and a summary bound from C#, a binding class of the sample's; buttons change the object and the fields follow. |
 | `UIRender` | Drawing: rounded boxes, borders of four colors, a circle, images stretched, cropped and fitted, tinted icons, 9-slice buttons and panels, a list and an image clipped to rounded and round boxes, and charts painted with vector paths (a line with a gradient, bars, a donut) by the launcher's `SampleChart` element. Its images are its own (drawn by `Tools/GenerateData.py`) beside CC0 art of Kenney and Poly Haven (`Samples/UIRender/CREDITS.txt`). |
 
 ## Running
@@ -25,6 +27,8 @@ HelixSamples -sample UIInput
 HelixSamples -sample UIStyles
 HelixSamples -sample UIElements
 HelixSamples -sample UIControls
+HelixSamples -sample UICollections
+HelixSamples -sample UIBinding
 ```
 
 `-pipeline` picks the render pipeline (`standard` by default; `none` runs without one: the engine clears the cameras and

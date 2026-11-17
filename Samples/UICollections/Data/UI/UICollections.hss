@@ -1,0 +1,35 @@
+/* The collections sample's layout: three columns in Helix's default theme. */
+
+#page { flex-grow: 1; flex-direction: row; padding: 10px; }
+
+.column {
+    width: 270px;
+    margin-right: 10px;
+    padding: 6px;
+    background-color: rgba(28, 30, 36, 0.92);
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgb(20, 21, 25);
+}
+
+.wide { width: 330px; }
+
+.heading { font-size: 18px; -helix-font-style: bold; margin: 0 0 4px 3px; color: rgb(222, 224, 230); }
+
+.hint { font-size: 11px; white-space: normal; margin: 2px 3px 8px 3px; color: rgb(150, 154, 166); }
+
+.list { height: 210px; flex-grow: 0; }
+
+.tree { height: 150px; flex-grow: 0; }
+
+.table { height: 230px; flex-grow: 0; }
+
+.buttons { flex-direction: row; flex-wrap: wrap; }
+
+.chart { height: 200px; margin: 4px 3px; background-color: rgb(20, 22, 27); border-radius: 4px; }
+
+.meter { height: 12px; margin: 8px 3px; background-color: rgb(20, 22, 27); border-radius: 6px; }
+
+.meter-fill { width: 30%; height: 100%; background-color: rgb(88, 166, 255); border-radius: 6px; }
+
+.status { margin: 6px 3px 0 3px; white-space: normal; color: rgb(150, 154, 166); }

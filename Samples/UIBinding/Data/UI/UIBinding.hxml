@@ -1,0 +1,61 @@
+<HXML>
+  <Style src="UIBinding.hss"/>
+  <Element name="page">
+    <Element class="column">
+      <Label class="heading" text="Bound in markup"/>
+      <TextField label="Name">
+        <Bindings>
+          <DataBinding property="value" data-source-path="name"/>
+        </Bindings>
+      </TextField>
+      <SliderInt label="Level" low-value="1" high-value="60">
+        <Bindings>
+          <DataBinding property="value" data-source-path="level"/>
+        </Bindings>
+      </SliderInt>
+      <Slider label="Health" low-value="0" high-value="1">
+        <Bindings>
+          <DataBinding property="value" data-source-path="health"/>
+        </Bindings>
+      </Slider>
+      <Toggle label="Hardcore">
+        <Bindings>
+          <DataBinding property="value" data-source-path="hardcore"/>
+        </Bindings>
+      </Toggle>
+      <Element data-source-path="stats" class="stats">
+        <Label class="subheading" text="Stats (a data source path of their own)"/>
+        <IntegerField label="Strength">
+          <Bindings>
+            <DataBinding property="value" data-source-path="strength"/>
+          </Bindings>
+        </IntegerField>
+        <IntegerField label="Agility">
+          <Bindings>
+            <DataBinding property="value" data-source-path="agility"/>
+          </Bindings>
+        </IntegerField>
+      </Element>
+      <Element class="buttons">
+        <Button name="level-up" text="Level up" tooltip="Changes the object: the bound fields follow"/>
+        <Button name="heal" text="Heal" tooltip="Health back to full"/>
+        <Button name="reset" text="Reset"/>
+      </Element>
+    </Element>
+    <Element class="column">
+      <Label class="heading" text="The object"/>
+      <Label class="caption" text="Health (to the UI only, through a converter group)"/>
+      <Label name="health-text" class="value">
+        <Bindings>
+          <DataBinding property="text" data-source-path="health" binding-mode="ToTarget" source-to-ui-converters="percent"/>
+        </Bindings>
+      </Label>
+      <ProgressBar name="health-bar" title="Health" low-value="0" high-value="1"/>
+      <Label class="caption" text="Summary (bound from C#)"/>
+      <Label name="summary" class="value"/>
+      <Label class="caption" text="Power (a binding class of the sample's)"/>
+      <Label name="power" class="value"/>
+      <Label name="log" class="status" text="Change a field or press a button"/>
+    </Element>
+  </Element>
+</HXML>

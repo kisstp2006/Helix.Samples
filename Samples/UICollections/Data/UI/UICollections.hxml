@@ -1,0 +1,34 @@
+<HXML>
+  <Style src="UICollections.hss"/>
+  <Element name="page">
+    <Element class="column">
+      <Label class="heading" text="List view"/>
+      <ListView name="inventory" fixed-item-height="22" show-border="true" show-foldout-header="true" header-title="Inventory"
+                show-add-remove-footer="true" reorderable="true" reorder-mode="Animated" selection-type="Multiple"
+                show-alternating-row-backgrounds="ContentOnly" class="list"/>
+      <Label class="hint" text="Shift and Ctrl select more, drag a row to move it, right click for its menu."/>
+      <Label class="heading" text="Tree view"/>
+      <TreeView name="scene" fixed-item-height="20" show-border="true" class="tree"/>
+    </Element>
+    <Element class="column wide">
+      <Label class="heading" text="Multi-column list view"/>
+      <MultiColumnListView name="assets" fixed-item-height="22" show-border="true" sorting-mode="Default"
+                           show-alternating-row-backgrounds="All" class="table"/>
+      <Label class="hint" text="Click a header to sort, drag its edge to resize, right click it to hide a column."/>
+      <Label class="heading" text="Menus and tooltips"/>
+      <Element class="buttons">
+        <Button name="menu" text="Open menu" tooltip="A dropdown menu of actions, built in C#"/>
+        <Button name="animate" text="Animate" tooltip="Moves the bars of the chart with an animation"/>
+        <Button name="shuffle" text="Shuffle" tooltip="New values for the chart"/>
+      </Element>
+    </Element>
+    <Element class="column">
+      <Label class="heading" text="Painted in C#"/>
+      <Element name="chart" class="chart" tooltip="Bars, a line and a vector image drawn by generateVisualContent"/>
+      <Element name="meter" class="meter">
+        <Element name="meter-fill" class="meter-fill"/>
+      </Element>
+      <Label name="status" class="status" text="Select a row"/>
+    </Element>
+  </Element>
+</HXML>

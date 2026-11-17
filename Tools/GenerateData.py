@@ -19,7 +19,9 @@ HEADER = "%YAML 1.1\n%TAG !h! tag:helixengine,2026:\n"
 # every sample, a sample's own C# classes beside it.
 SCRIPTS = [("UIView", "HelixUI", "HelixEngine.UI", "UIView")]
 SAMPLE_SCRIPTS = {"UIElements": [("UIElementsDemo", "HelixSamples.UIElements", "HelixSamples", "UIElementsDemo")],
-                  "UIControls": [("UIControlsDemo", "HelixSamples.UIControls", "HelixSamples", "UIControlsDemo")]}
+                  "UIControls": [("UIControlsDemo", "HelixSamples.UIControls", "HelixSamples", "UIControlsDemo")],
+                  "UICollections": [("UICollectionsDemo", "HelixSamples.UICollections", "HelixSamples", "UICollectionsDemo")],
+                  "UIBinding": [("UIBindingDemo", "HelixSamples.UIBinding", "HelixSamples", "UIBindingDemo")]}
 
 # The fileID of the main object of a script asset (a MonoBehaviour's class ID times 100000).
 MAIN_SCRIPT_OBJECT = 11400000
@@ -172,7 +174,9 @@ IMAGES = {"UIRender": [("Images/Landscape.png", 192, 112, landscape), ("Images/A
 # The C# components of a sample's UI object: their script asset and serialized fields (assets of the folder).
 SAMPLE_COMPONENTS = {"UIElements": [("Scripts/UIElementsDemo.asset", [("rowTemplate", "UI/Row.hxml"), ("darkTheme", "UI/Dark.hss"),
                                                                      ("lightTheme", "UI/Light.hss")])],
-                     "UIControls": [("Scripts/UIControlsDemo.asset", [("worldTemplate", "UI/World.hxml")])]}
+                     "UIControls": [("Scripts/UIControlsDemo.asset", [("worldTemplate", "UI/World.hxml")])],
+                     "UICollections": [("Scripts/UICollectionsDemo.asset", [])],
+                     "UIBinding": [("Scripts/UIBindingDemo.asset", [])]}
 
 # Images in a UI: readable (into the UI's atlas), their bytes as they are, no mipmaps, clamped.
 IMAGE_META = ("TextureImporter:\n  mipmaps:\n    enableMipMap: 0\n  sRGBTexture: 0\n  isReadable: 1\n"
@@ -222,7 +226,9 @@ SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.
                ("UIInput", "Helix Samples - UI Input", "UI/UIInput.hxml", (0.08, 0.09, 0.11, 1)),
                ("UIStyles", "Helix Samples - UI Styles", "UI/UIStyles.hxml", (0.08, 0.09, 0.11, 1)),
                ("UIElements", "Helix Samples - UI Element Types", "UI/UIElements.hxml", (0.08, 0.09, 0.11, 1)),
-               ("UIControls", "Helix Samples - UI Controls", "UI/UIControls.hxml", (0.11, 0.13, 0.17, 1))]
+               ("UIControls", "Helix Samples - UI Controls", "UI/UIControls.hxml", (0.11, 0.13, 0.17, 1)),
+               ("UICollections", "Helix Samples - UI Collections", "UI/UICollections.hxml", (0.11, 0.13, 0.17, 1)),
+               ("UIBinding", "Helix Samples - UI Data Binding", "UI/UIBinding.hxml", (0.11, 0.13, 0.17, 1))]
 
 
 def main():

@@ -1,0 +1,6 @@
+# The sample's data folder: every file, its guid and its path (Tools/GenerateData.py).
+5803d80e3f6f8d85403162fa73a1b0f5 Scenes/UIBinding.helix
+836bde7706022f95e8c28bbecf70ff7f Scripts/UIBindingDemo.asset
+cab2f9ece0051efd8bb763de6d637800 Scripts/UIView.asset
+3600e719ae110eb9b13b8d6302e8de6b UI/UIBinding.hss
+384edee38c74a44d914b353075f802c2 UI/UIBinding.hxml
