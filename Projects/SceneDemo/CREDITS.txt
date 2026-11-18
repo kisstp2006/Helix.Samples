@@ -1,0 +1,8 @@
+The assets of SceneDemo
+
+Assets/Models/*.obj and Assets/Textures/Checker.png are the project's own, made by Tools/GenerateSceneDemo.py.
+
+Assets/Textures/CC0/KenneyPanda.png (the poster) is art released under Creative Commons Zero (CC0 1.0, public domain
+dedication, https://creativecommons.org/publicdomain/zero/1.0/), copied from Samples/UICanvas/Data/Images/CC0:
+  Animal Pack Redux by Kenney (www.kenney.nl), https://opengameart.org/content/animal-pack-redux
+  (kenney_animalPackRedux.zip)

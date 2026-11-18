@@ -1,5 +1,5 @@
 """Builds an editor project's scripts against an editor build and opens the project in that editor:
-python Tools/OpenProject.py <project: AssetDemo, InspectorDemo> <path to HelixEditor(.exe)> [editor arguments...]
+python Tools/OpenProject.py <project: AssetDemo, InspectorDemo, SceneDemo> <path to HelixEditor(.exe)> [editor arguments...]
 The scripts (Projects/<project>/Scripts/*.csproj) go to Projects/<project>/Library/ScriptAssemblies (the editor loads
 a project's script assemblies from there); the editor's Managed folder beside its executable is what they are built
 against.

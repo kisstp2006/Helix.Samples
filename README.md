@@ -73,6 +73,21 @@ spinner selected (made and saved there the first time):
 python Tools/OpenProject.py InspectorDemo <path to HelixEditor.exe> -executeMethod InspectorDemo.DemoScene.Show
 ```
 
+`Projects/SceneDemo` is the Scene and Game views at work: a scene (`Assets/Scenes/SceneDemo.helix`) of its own models
+and checker (made by `Tools/GenerateSceneDemo.py`) and a poster of CC0 art by Kenney (`Projects/SceneDemo/CREDITS.txt`),
+a sun, a lamp and a spot light, the Main Camera and a top camera on Display 2. Its scripts
+(`Projects/SceneDemo/Scripts/SceneDemo.cs`) are the component `Patrol` (waypoints drawn by OnDrawGizmos, their reach by
+OnDrawGizmosSelected), its editor's `OnSceneGui` (a position handle and a label per waypoint), the `Waypoint Tool` (an
+EditorTool of the Patrol, in the Tools overlay while one is selected: a click on the ground adds a waypoint) and the
+`Patrol` overlay of the Scene view. The materials are made as the scene opens for the pipeline the editor runs
+(`Assets/Materials/<pipeline>`), the lights given their physical units for the physical one. Demo > Open Scene Demo
+opens it with the guard selected:
+
+```
+python Tools/OpenProject.py SceneDemo <path to HelixEditor.exe> -executeMethod SceneDemo.DemoScene.Show
+python Tools/OpenProject.py SceneDemo <path to HelixEditor.exe> -pipeline physical -executeMethod SceneDemo.DemoScene.Show
+```
+
 ## Contents
 
 | Path | Content |
@@ -84,7 +99,8 @@ python Tools/OpenProject.py InspectorDemo <path to HelixEditor.exe> -executeMeth
 | `Samples/<name>/Data/` | Each sample's data folder: its own files, and the settings, scene, script assets, images, their .meta and the index a build would leave (written by `Tools/GenerateData.py`) |
 | `Projects/AssetDemo/` | The editor project above: its assets with their .meta files, its editor scripts and their project file |
 | `Projects/InspectorDemo/` | The editor project of the Inspector: its scene, its scripts' assets with their .meta files, its scripts and their project file |
-| `Tools/GenerateAssetDemo.py`, `Tools/OpenProject.py` | Draw the AssetDemo project's assets; build an editor project's scripts and open it in an editor |
+| `Projects/SceneDemo/` | The editor project of the Scene and Game views: its models, textures, scene and materials with their .meta files, its scripts and their project file |
+| `Tools/GenerateAssetDemo.py`, `Tools/GenerateSceneDemo.py`, `Tools/OpenProject.py` | Draw the AssetDemo and SceneDemo projects' assets; build an editor project's scripts and open it in an editor |
 | `Tools/PrepareImages.py` | Puts the CC0 art into the data folders from the downloaded packs (listed in each sample's `CREDITS.txt`) |
 | `Tests/` | Each sample on each pipeline in batch mode, its screenshot against `Tests/Golden/` (samples drawn with the machine's fonts are compared only off CI) |
 | `Tools/CompareImages/` | The screenshot comparison of the tests |
