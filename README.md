@@ -54,12 +54,24 @@ Window > Asset Demo, a tab beside the scene view listing the assets with their m
 import hashes. The editor imports the project into its `Library/` (the artifacts the next open loads from).
 
 ```
-python Tools/OpenAssetDemo.py <path to HelixEditor.exe>
-python Tools/OpenAssetDemo.py <path to HelixEditor.exe> -pipeline physical -force-glcore
+python Tools/OpenProject.py AssetDemo <path to HelixEditor.exe>
+python Tools/OpenProject.py AssetDemo <path to HelixEditor.exe> -pipeline physical -force-glcore
 ```
 
 builds the scripts against that editor's assemblies into `Projects/AssetDemo/Library/ScriptAssemblies` (where the
 editor loads a project's script assemblies from) and opens the project; the arguments after the editor's path go to it.
+
+`Projects/InspectorDemo` is the editor's Inspector at work: a scene (`Assets/Scenes/InspectorDemo.helix`) of two
+spinners, a lamp with a light and a marker, and the default camera and light; its scripts
+(`Projects/InspectorDemo/Scripts/InspectorDemo.cs`) are the components `Spinner` (Range, Tooltip, Header, Space,
+Multiline, Min, an enum, a color, an array, a reference and a struct with a property drawer) and `Marker` (the default
+inspector), the custom editor `SpinnerEditor` (several spinners at once, a help box and a button) and the drawer
+`LimitsDrawer`; both components are under Demo in Add Component. Demo > Open Inspector Demo opens the scene with a
+spinner selected (made and saved there the first time):
+
+```
+python Tools/OpenProject.py InspectorDemo <path to HelixEditor.exe> -executeMethod InspectorDemo.DemoScene.Show
+```
 
 ## Contents
 
@@ -71,7 +83,8 @@ editor loads a project's script assemblies from) and opens the project; the argu
 | `Source/Helix/Samples/Charts/` | The `SampleChart` element type: charts of the values in its markup, painted by kind from a table |
 | `Samples/<name>/Data/` | Each sample's data folder: its own files, and the settings, scene, script assets, images, their .meta and the index a build would leave (written by `Tools/GenerateData.py`) |
 | `Projects/AssetDemo/` | The editor project above: its assets with their .meta files, its editor scripts and their project file |
-| `Tools/GenerateAssetDemo.py`, `Tools/OpenAssetDemo.py` | Draw the editor project's assets; build its scripts and open it in an editor |
+| `Projects/InspectorDemo/` | The editor project of the Inspector: its scene, its scripts' assets with their .meta files, its scripts and their project file |
+| `Tools/GenerateAssetDemo.py`, `Tools/OpenProject.py` | Draw the AssetDemo project's assets; build an editor project's scripts and open it in an editor |
 | `Tools/PrepareImages.py` | Puts the CC0 art into the data folders from the downloaded packs (listed in each sample's `CREDITS.txt`) |
 | `Tests/` | Each sample on each pipeline in batch mode, its screenshot against `Tests/Golden/` (samples drawn with the machine's fonts are compared only off CI) |
 | `Tools/CompareImages/` | The screenshot comparison of the tests |

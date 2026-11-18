@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The InspectorDemo project's scripts: its components, their editor and drawer, the scene's setup. Built against
+       an editor build's Managed folder (HelixEditorManaged) into the project's Library/ScriptAssemblies, where the
+       editor loads a project's script assemblies. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net11.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Message methods are found by reflection. -->
+    <NoWarn>IDE0051;CS0169;CS0649</NoWarn>
+    <AssemblyName>InspectorDemo</AssemblyName>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputPath>$(MSBuildThisFileDirectory)../Library/ScriptAssemblies/</OutputPath>
+    <IntermediateOutputPath>$(MSBuildThisFileDirectory)../Library/ScriptBuild/</IntermediateOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HelixEngine.CoreModule"><HintPath>$(HelixEditorManaged)/HelixEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Helix.Mathematics"><HintPath>$(HelixEditorManaged)/Helix.Mathematics.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Helix.UI.Runtime"><HintPath>$(HelixEditorManaged)/Helix.UI.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Helix.Scripting.Runtime"><HintPath>$(HelixEditorManaged)/Helix.Scripting.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="HelixEditor.CoreModule"><HintPath>$(HelixEditorManaged)/HelixEditor.CoreModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
