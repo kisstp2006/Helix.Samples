@@ -53,8 +53,8 @@ namespace helix::samples
             ::HelixEngine::Text::TextBase buttonText = button.transform.Get().GetChild(0).gameObject.Get().GetComponent<ui::CanvasText>();
             buttonText.text = "C++ button";
             buttonText.fontSize = 18.0f;
-            ui::Button b = button.GetComponent<ui::Button>();
-            b.onClickNative.Add({[](void* self) {
+            button_ = button.GetComponent<ui::Button>();
+            clickToken_ = button_.onClickNative.Add({[](void* self) {
                                      auto* s = static_cast<UICanvasCpp*>(self);
                                      s->clicks_++;
                                      s->Show(Format("C++: the button, {} clicks", s->clicks_));
@@ -66,17 +66,26 @@ namespace helix::samples
             ::HelixEngine::Text::TextBase toggleText = toggle.transform.Get().GetChild(1).gameObject.Get().GetComponent<ui::CanvasText>();
             toggleText.text = "Night mode";
             toggleText.color = Color(0.92f, 0.94f, 0.98f, 1);
-            ui::Toggle t = toggle.GetComponent<ui::Toggle>();
-            t.onValueChangedNative.Add({[](void* self, bool on) { static_cast<UICanvasCpp*>(self)->Show(Format("C++: night mode {}", on ? "on" : "off")); }, this});
+            toggle_ = toggle.GetComponent<ui::Toggle>();
+            toggleToken_ = toggle_.onValueChangedNative.Add({[](void* self, bool on) { static_cast<UICanvasCpp*>(self)->Show(Format("C++: night mode {}", on ? "on" : "off")); }, this});
 
             api::GameObject slider = ui::DefaultControls::CreateSliderInternal(none);
             Attach(slider, panel, Vector2(0, 1), Vector2(1, 1), Vector2(14, -126), Vector2(-14, -104));
-            ui::Slider s = slider.GetComponent<ui::Slider>();
-            s.minValue = 0.0f;
-            s.maxValue = 10.0f;
-            s.wholeNumbers = true;
-            s.value = 4.0f;
-            s.onValueChangedNative.Add({[](void* self, f32 v) { static_cast<UICanvasCpp*>(self)->Show(Format("C++: speed {}", i32(v))); }, this});
+            slider_ = slider.GetComponent<ui::Slider>();
+            slider_.minValue = 0.0f;
+            slider_.maxValue = 10.0f;
+            slider_.wholeNumbers = true;
+            slider_.value = 4.0f;
+            sliderToken_ = slider_.onValueChangedNative.Add({[](void* self, f32 v) { static_cast<UICanvasCpp*>(self)->Show(Format("C++: speed {}", i32(v))); }, this});
+        }
+
+        // The handlers are the script's: removed as it goes (quietly when a control went first).
+        void OnDestroy()
+        {
+            button_.onClickNative.Remove(clickToken_);
+            toggle_.onValueChangedNative.Remove(toggleToken_);
+            slider_.onValueChangedNative.Remove(sliderToken_);
+            clickToken_ = toggleToken_ = sliderToken_ = 0;
         }
 
     private:
@@ -100,6 +109,10 @@ namespace helix::samples
         }
 
         ::HelixEngine::Text::TextBase line_;
+        ::HelixEngine::CanvasUI::Button button_;
+        ::HelixEngine::CanvasUI::Toggle toggle_;
+        ::HelixEngine::CanvasUI::Slider slider_;
+        u64 clickToken_ = 0, toggleToken_ = 0, sliderToken_ = 0;
         i32 clicks_ = 0;
         bool built_ = false;
     };
