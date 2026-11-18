@@ -13,13 +13,14 @@ helix_require(Engine)
 helix_require(RenderPipelines.Standard)
 helix_require(RenderPipelines.Physical)
 helix_require(UI)
+helix_require(CanvasUI)
 helix_require(Player)
 
 if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
     helix_collect_sources(launcher_sources "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix")
     file(GLOB_RECURSE launcher_headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/*.h")
     helix_add_executable(helix_samples SOURCES ${launcher_sources} ${launcher_headers}
-                         DEPS Helix::PlayerCore Helix::RenderPipelines.Standard Helix::RenderPipelines.Physical Helix::UIEngine)
+                         DEPS Helix::PlayerCore Helix::RenderPipelines.Standard Helix::RenderPipelines.Physical Helix::UIEngine Helix::CanvasUI)
     set_target_properties(helix_samples PROPERTIES OUTPUT_NAME HelixSamples RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
     target_include_directories(helix_samples PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source")
     # The samples' data folders are read where they are, so an edit of a sample's files shows while it runs.
@@ -43,6 +44,7 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
     helix_bindgen(helix_samples MODULE HelixSamples NAMESPACE HelixSamples KIND NativeGame
                   HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Elements/Gauge.h" "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Scripts/UIControlsCpp.h"
                           "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Scripts/UIImmediateCpp.h"
+                          "${CMAKE_CURRENT_SOURCE_DIR}/Source/Helix/Samples/Scripts/UICanvasCpp.h"
                   REFERENCES ${samples_references} REFERENCE_NAMESPACE HelixEngine
                   INCLUDE_ROOTS "${CMAKE_CURRENT_SOURCE_DIR}/Source" "${samples_engine_source}" "${samples_math_dir}/Source"
                                 "${samples_ui_engine_source}" "${samples_ui_dir}/Source")
@@ -53,7 +55,8 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
     get_filename_component(samples_runtime_dir "${HELIX_SCRIPTING_RUNTIME}" DIRECTORY)
     get_filename_component(samples_runtime_name "${HELIX_SCRIPTING_RUNTIME}" NAME_WLE)
     # The runtime's config is written beside its assembly by the same build: copied, not depended on.
-    set(samples_engine_assemblies "${HELIX_SCRIPTING_RUNTIME}" "${HELIX_CORE_MODULE}" ${HELIX_CORE_MODULE_REFERENCES} "${HELIX_UI_RUNTIME}")
+    set(samples_engine_assemblies "${HELIX_SCRIPTING_RUNTIME}" "${HELIX_CORE_MODULE}" ${HELIX_CORE_MODULE_REFERENCES} "${HELIX_UI_RUNTIME}"
+        "${HELIX_CANVASUI_RUNTIME}")
     set(samples_engine_files ${samples_engine_assemblies} "${samples_runtime_dir}/${samples_runtime_name}.runtimeconfig.json")
     file(GLOB samples_script_projects CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Samples/*/Scripts/*.csproj")
     foreach(project IN LISTS samples_script_projects)
@@ -70,20 +73,22 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
             OUTPUT "${out}/.staged"
             COMMAND "${HELIX_DOTNET}" build "${project}" -c Release --artifacts-path "${artifacts}" --nologo -v quiet
                     "-p:HelixCoreModule=${HELIX_CORE_MODULE}" "-p:HelixScriptingRuntime=${HELIX_SCRIPTING_RUNTIME}" "-p:HelixUIRuntime=${HELIX_UI_RUNTIME}"
+                    "-p:HelixCanvasUIRuntime=${HELIX_CANVASUI_RUNTIME}"
             COMMAND "${CMAKE_COMMAND}" -E make_directory "${out}"
             COMMAND "${CMAKE_COMMAND}" -E copy "${dll}" ${samples_engine_files} "${out}"
             COMMAND "${CMAKE_COMMAND}" -E touch "${out}/.staged"
             DEPENDS ${scripts} "${project}" ${samples_engine_assemblies}
             COMMENT "Building the C# scripts of the sample ${sample}")
         add_custom_target(helix_samples_scripts_${sample} ALL DEPENDS "${out}/.staged")
-        add_dependencies(helix_samples_scripts_${sample} helix_ui_runtime helix_core_module helix_scripting_runtime)
+        add_dependencies(helix_samples_scripts_${sample} helix_ui_runtime helix_canvasui_runtime helix_core_module helix_scripting_runtime)
         add_dependencies(helix_samples helix_samples_scripts_${sample})
     endforeach()
 
     # The shader assemblies beside the launcher: the core's library and shaders, both pipelines', the UI's.
     set(shaders_out "${CMAKE_BINARY_DIR}/Shaders")
     set(shader_assemblies "${HELIX_RENDER_PIPELINES_CORE_SHADER_LIBRARY}" "${HELIX_RENDER_PIPELINES_CORE_SHADERS}"
-        "${HELIX_RENDER_PIPELINES_STANDARD_SHADERS}" "${HELIX_RENDER_PIPELINES_PHYSICAL_SHADERS}" "${HELIX_UI_SHADERS}")
+        "${HELIX_RENDER_PIPELINES_STANDARD_SHADERS}" "${HELIX_RENDER_PIPELINES_PHYSICAL_SHADERS}" "${HELIX_UI_SHADERS}"
+        "${HELIX_CANVASUI_SHADERS}")
     add_custom_command(
         OUTPUT "${shaders_out}/.staged"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${shaders_out}"
@@ -93,7 +98,7 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         COMMENT "Staging the samples' shader assemblies")
     add_custom_target(helix_samples_shaders ALL DEPENDS "${shaders_out}/.staged")
     add_dependencies(helix_samples_shaders helix_render_pipelines_core_shaders helix_render_pipelines_standard_shaders
-                     helix_render_pipelines_physical_shaders helix_ui_shaders)
+                     helix_render_pipelines_physical_shaders helix_ui_shaders helix_canvasui_shaders)
     add_dependencies(helix_samples helix_samples_shaders)
 
     # The golden images: each sample on each pipeline in batch mode, its screenshot against Tests/Golden.
@@ -103,8 +108,9 @@ if(HELIX_PLATFORM STREQUAL "windows" OR HELIX_PLATFORM STREQUAL "linux")
         set(runner "${CMAKE_CURRENT_SOURCE_DIR}/Tests/RunSample.cmake")
         # Samples drawn with the machine's fonts (MACHINE_FONTS) run everywhere but compare their screenshots only
         # where the goldens were made (not on CI, whose fonts differ).
-        set(machine_font_samples UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph UIImmediate)
-        foreach(sample IN ITEMS UILayout UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph UIImmediate)
+        set(machine_font_samples UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph UIImmediate UICanvas)
+        foreach(sample IN ITEMS UILayout UIText UIRender UIInput UIStyles UIElements UIControls UICollections UIBinding UINodeGraph UIImmediate
+                               UICanvas)
             set(machine_fonts 0)
             if(sample IN_LIST machine_font_samples)
                 set(machine_fonts 1)

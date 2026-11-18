@@ -21,6 +21,7 @@ extern "C" void HxBindings_HelixRenderPipelinesCore_Publish();
 extern "C" void HxBindings_HelixRenderPipelinesStandard_Publish();
 extern "C" void HxBindings_HelixRenderPipelinesPhysical_Publish();
 extern "C" void HxBindings_HelixUI_Publish();
+extern "C" void HxBindings_HelixCanvasUI_Publish();
 HX_BINDINGS_EXPORT void HxBindings_HelixSamples_Publish();
 
 namespace helix::samples
@@ -47,6 +48,7 @@ namespace helix::samples
         constexpr ModuleEntry kModules[] = {
             {"HelixRenderPipelinesCore", &HxBindings_HelixRenderPipelinesCore_Publish},
             {"HelixUI", &HxBindings_HelixUI_Publish},
+            {"HelixCanvasUI", &HxBindings_HelixCanvasUI_Publish},
             // The launcher's own game module: the samples' C++ element types (Gauge).
             {"HelixSamples", &HxBindings_HelixSamples_Publish},
         };

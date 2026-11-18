@@ -76,3 +76,6 @@
 [submodule "External/Helix.Font"]
 	path = External/Helix.Font
 	url = https://github.com/kisstp2006/Helix.Font
+[submodule "External/Helix.CanvasUI"]
+	path = External/Helix.CanvasUI
+	url = https://github.com/kisstp2006/Helix.CanvasUI

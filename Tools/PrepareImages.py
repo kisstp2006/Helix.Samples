@@ -40,6 +40,18 @@ IMAGES = [
     ("icons", "PNG/White/2x/audioOn.png", "UIImmediate", "Images/CC0/KenneyIconSound.png"),
     ("icons", "PNG/White/2x/musicOn.png", "UIImmediate", "Images/CC0/KenneyIconMusic.png"),
     ("icons", "PNG/White/2x/wrench.png", "UIImmediate", "Images/CC0/KenneyIconWrench.png"),
+    ("icons", "PNG/White/2x/gear.png", "UICanvas", "Images/CC0/KenneyIconGear.png"),
+    ("icons", "PNG/White/2x/trophy.png", "UICanvas", "Images/CC0/KenneyIconTrophy.png"),
+    ("icons", "PNG/White/2x/medal1.png", "UICanvas", "Images/CC0/KenneyIconMedal.png"),
+    ("icons", "PNG/White/2x/audioOn.png", "UICanvas", "Images/CC0/KenneyIconSound.png"),
+    ("icons", "PNG/White/2x/musicOn.png", "UICanvas", "Images/CC0/KenneyIconMusic.png"),
+    ("icons", "PNG/White/2x/wrench.png", "UICanvas", "Images/CC0/KenneyIconWrench.png"),
+    ("animals", "PNG/Round/panda.png", "UICanvas", "Images/CC0/KenneyPanda.png"),
+    ("animals", "PNG/Round/penguin.png", "UICanvas", "Images/CC0/KenneyPenguin.png"),
+    ("animals", "PNG/Round/owl.png", "UICanvas", "Images/CC0/KenneyOwl.png"),
+    ("animals", "PNG/Round/rabbit.png", "UICanvas", "Images/CC0/KenneyRabbit.png"),
+    ("animals", "PNG/Round/narwhal.png", "UICanvas", "Images/CC0/KenneyNarwhal.png"),
+    ("animals", "PNG/Round/frog.png", "UICanvas", "Images/CC0/KenneyFrog.png"),
 ]
 
 

@@ -1,0 +1,9 @@
+%YAML 1.1
+%TAG !h! tag:helixengine,2026:
+--- !h!115 &11500000
+MonoScript:
+  m_Name: UICanvasCpp
+  m_ExecutionOrder: 0
+  m_ClassName: UICanvasCpp
+  m_Namespace: HelixSamples
+  m_AssemblyName: HelixSamples

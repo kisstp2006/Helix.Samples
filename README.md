@@ -1,6 +1,6 @@
 # Helix.Samples
 
-Samples of the Helix engine, run by a launcher: the player with both render pipelines and the UI built in.
+Samples of the Helix engine, run by a launcher: the player with both render pipelines, the UI and the canvas UI built in.
 
 ## Samples
 
@@ -16,6 +16,7 @@ Samples of the Helix engine, run by a launcher: the player with both render pipe
 | `UIBinding` | Data binding: a character sheet (`Samples/UIBinding/Scripts`) as the page's data source; fields bound both ways in markup (`<Bindings>`, a section of its own `data-source-path`), a label through a converter group, a progress bar and a summary bound from C#, a binding class of the sample's; buttons change the object and the fields follow. |
 | `UINodeGraph` | A node graph editor in the reference editor's dark skin, its logic in the launcher's C++ (`Source/Helix/Samples/Graph`): port types and node kinds in registries (input, math, procedural, UV, channel; the Vertex and Fragment contexts with their blocks), evaluated per pixel on the CPU for every node's preview and a lit sphere in the main preview; nodes with category stripes, ports colored by type, inline values of unconnected inputs, bezier edges. Drag a node to move it, drag a port to connect it (from a connected input: to take the edge off), drag an inline value to change it, wheel to zoom, middle button or Alt to pan, a band to select, Delete to remove, F to frame, a right click or Space for the create node menu. The blackboard, the graph inspector (following the selection) and the main preview float over the graph. |
 | `UIImmediate` | The immediate GUI: the C# script's `OnGui` (`Samples/UIImmediate/Scripts`) draws a HUD, a laid out settings window in pages (fields, a password field, toggles, sliders, toolbars, a selection grid), a debug console window (the log as it comes, a line to log; the wrench of the dock opens it), a window with a scrolled list of companions with their pictures and repeat buttons, a notes window with a text area and the clipboard, a dock of icon buttons with tooltips and a medal turned by the GUI's matrix; the launcher's C++ script (`Source/Helix/Samples/Scripts/UIImmediateCpp.h`) lays out an area of its own through the C++ script API; all over a UI panel of markup. Drag a window by its title; a click brings it to the front; Tab moves through the text fields. Its images are its own beside CC0 art of Kenney (`Samples/UIImmediate/CREDITS.txt`). |
+| `UICanvas` | The canvas UI (GameObjects): a HUD over a 3D yard (a player card with a filled health bar, a star), an inventory of icons in a scrolled grid with a vertical scrollbar, settings (a toggle that hides the yard's labels, a slider for the camera's field of view, a dropdown, a name field), a world space terminal on a post in the yard clicked and typed into through the camera (`open`, `heal`), world text labels over the crates, a status line; a panel of a button, a toggle and a slider made by the launcher's C++ script (`Source/Helix/Samples/Scripts/UICanvasCpp.h`) through the canvas UI's C++ script API. The C# script is `Samples/UICanvas/Scripts/UICanvasDemo.cs`. Its images are its own beside CC0 art of Kenney (`Samples/UICanvas/CREDITS.txt`). |
 | `UIRender` | Drawing: rounded boxes, borders of four colors, a circle, images stretched, cropped and fitted, tinted icons, 9-slice buttons and panels, a list and an image clipped to rounded and round boxes, and charts painted with vector paths (a line with a gradient, bars, a donut) by the launcher's `SampleChart` element. Its images are its own (drawn by `Tools/GenerateData.py`) beside CC0 art of Kenney and Poly Haven (`Samples/UIRender/CREDITS.txt`). |
 
 ## Running
@@ -33,6 +34,7 @@ HelixSamples -sample UICollections
 HelixSamples -sample UIBinding
 HelixSamples -sample UINodeGraph
 HelixSamples -sample UIImmediate
+HelixSamples -sample UICanvas -pipeline physical
 ```
 
 `-pipeline` picks the render pipeline (`standard` by default; `none` runs without one: the engine clears the cameras and

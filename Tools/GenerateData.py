@@ -24,7 +24,9 @@ SAMPLE_SCRIPTS = {"UIElements": [("UIElementsDemo", "HelixSamples.UIElements", "
                   "UICollections": [("UICollectionsDemo", "HelixSamples.UICollections", "HelixSamples", "UICollectionsDemo")],
                   "UIBinding": [("UIBindingDemo", "HelixSamples.UIBinding", "HelixSamples", "UIBindingDemo")],
                   "UIImmediate": [("UIImmediateDemo", "HelixSamples.UIImmediate", "HelixSamples", "UIImmediateDemo"),
-                                  ("UIImmediateCpp", "HelixSamples", "HelixSamples", "UIImmediateCpp")]}
+                                  ("UIImmediateCpp", "HelixSamples", "HelixSamples", "UIImmediateCpp")],
+                  "UICanvas": [("UICanvasDemo", "HelixSamples.UICanvas", "HelixSamples", "UICanvasDemo"),
+                               ("UICanvasCpp", "HelixSamples", "HelixSamples", "UICanvasCpp")]}
 
 # The fileID of the main object of a script asset (a MonoBehaviour's class ID times 100000), and of an image's texture.
 MAIN_SCRIPT_OBJECT = 11400000
@@ -169,12 +171,24 @@ def cursor(x, y):
     return (0.0, 0.0, 0.0, 0.0)
 
 
+def slot(x, y):
+    """An inventory slot for 9-slicing: a dark well with a lit bevel at the top left and a shadow at the bottom
+    right (40 by 40, slices of 8)."""
+    if not rounded_box(x, y, 0, 0, 40, 40, 6):
+        return (0.0, 0.0, 0.0, 0.0)
+    if not rounded_box(x, y, 2, 2, 38, 38, 4):
+        return hex_color("#5c6b88") if x + y < 40 else hex_color("#151a24")
+    return mix(hex_color("#1d2330"), hex_color("#2a3243"), y / 40)
+
+
 # The samples' images: path, size, shading.
 IMAGES = {"UIRender": [("Images/Landscape.png", 192, 112, landscape), ("Images/Avatar.png", 96, 96, avatar),
                        ("Images/Frame.png", 48, 48, frame), ("Images/Star.png", 32, 32, star)],
           "UIStyles": [("Images/Landscape.png", 192, 112, landscape), ("Images/Star.png", 32, 32, star),
                        ("Images/Checker.png", 20, 20, checker), ("Images/Cursor.png", 24, 24, cursor)],
-          "UIImmediate": [("Images/Star.png", 32, 32, star), ("Images/Avatar.png", 96, 96, avatar), ("Images/Frame.png", 48, 48, frame)]}
+          "UIImmediate": [("Images/Star.png", 32, 32, star), ("Images/Avatar.png", 96, 96, avatar), ("Images/Frame.png", 48, 48, frame)],
+          "UICanvas": [("Images/Star.png", 32, 32, star), ("Images/Avatar.png", 96, 96, avatar), ("Images/Frame.png", 48, 48, frame),
+                       ("Images/Slot.png", 40, 40, slot)]}
 
 # The C# components of a sample's UI object: their script asset and serialized fields (assets of the folder).
 SAMPLE_COMPONENTS = {"UIElements": [("Scripts/UIElementsDemo.asset", [("rowTemplate", "UI/Row.hxml"), ("darkTheme", "UI/Dark.hss"),
@@ -190,7 +204,21 @@ SAMPLE_COMPONENTS = {"UIElements": [("Scripts/UIElementsDemo.asset", [("rowTempl
                                                                        ("trophy", "Images/CC0/KenneyIconTrophy.png"), ("medal", "Images/CC0/KenneyIconMedal.png"),
                                                                        ("sound", "Images/CC0/KenneyIconSound.png"), ("music", "Images/CC0/KenneyIconMusic.png"),
                                                                        ("wrench", "Images/CC0/KenneyIconWrench.png")]),
-                                     ("Scripts/UIImmediateCpp.asset", [])]}
+                                     ("Scripts/UIImmediateCpp.asset", [])],
+                     "UICanvas": [("Scripts/UICanvasDemo.asset", [("frame", "Images/Frame.png"), ("avatar", "Images/Avatar.png"), ("star", "Images/Star.png"), ("slot", "Images/Slot.png"),
+                                                                    ("gear", "Images/CC0/KenneyIconGear.png"),
+                                                                    ("trophy", "Images/CC0/KenneyIconTrophy.png"),
+                                                                    ("medal", "Images/CC0/KenneyIconMedal.png"),
+                                                                    ("sound", "Images/CC0/KenneyIconSound.png"),
+                                                                    ("music", "Images/CC0/KenneyIconMusic.png"),
+                                                                    ("wrench", "Images/CC0/KenneyIconWrench.png"),
+                                                                    ("panda", "Images/CC0/KenneyPanda.png"),
+                                                                    ("penguin", "Images/CC0/KenneyPenguin.png"),
+                                                                    ("owl", "Images/CC0/KenneyOwl.png"),
+                                                                    ("rabbit", "Images/CC0/KenneyRabbit.png"),
+                                                                    ("narwhal", "Images/CC0/KenneyNarwhal.png"),
+                                                                    ("frog", "Images/CC0/KenneyFrog.png")]),
+                                  ("Scripts/UICanvasCpp.asset", [])]}
 
 # Images in a UI: readable (into the UI's atlas), their bytes as they are, no mipmaps, clamped.
 IMAGE_META = ("TextureImporter:\n  mipmaps:\n    enableMipMap: 0\n  sRGBTexture: 0\n  isReadable: 1\n"
@@ -210,7 +238,7 @@ def color(c):
 
 def ui_scene(sample, markup, background):
     """A camera clearing to the background color and a UIView of the markup that watches its files (and the
-    sample's C# components beside it)."""
+    sample's C# components beside it); without markup the sample's components alone (a canvas sample)."""
     components = SAMPLE_COMPONENTS.get(sample, [])
     out = [HEADER]
     out.append("--- !h!1 &100\nGameObject:\n  m_Component:\n  - component: {fileID: 101}\n  - component: {fileID: 102}\n"
@@ -219,10 +247,12 @@ def ui_scene(sample, markup, background):
     out.append(f"--- !h!20 &102\nCamera:\n  m_GameObject: {{fileID: 100}}\n  m_Enabled: 1\n  m_ClearFlags: 2\n"
                f"  m_BackGroundColor: {color(background)}\n")
     listed = "".join(f"  - component: {{fileID: {113 + i}}}\n" for i in range(len(components)))
-    out.append("--- !h!1 &110\nGameObject:\n  m_Component:\n  - component: {fileID: 111}\n  - component: {fileID: 112}\n" + listed +
+    view = "  - component: {fileID: 112}\n" if markup else ""
+    out.append("--- !h!1 &110\nGameObject:\n  m_Component:\n  - component: {fileID: 111}\n" + view + listed +
                "  m_Name: UI\n  m_IsActive: 1\n")
     out.append("--- !h!4 &111\nTransform:\n  m_GameObject: {fileID: 110}\n  m_Children: []\n  m_Father: {fileID: 0}\n")
-    out.append(f"--- !h!114 &112\nGameBehaviour:\n  m_GameObject: {{fileID: 110}}\n  m_Enabled: 1\n"
+    if markup:
+        out.append(f"--- !h!114 &112\nGameBehaviour:\n  m_GameObject: {{fileID: 110}}\n  m_Enabled: 1\n"
                f"  m_Script: {{fileID: 11500000, guid: {guid(sample, 'Scripts/UIView.asset')}, type: 3}}\n"
                f"  m_Source: {{fileID: {MAIN_SCRIPT_OBJECT}, guid: {guid(sample, markup)}, type: 3}}\n"
                f"  m_SortingOrder: 0\n  m_WatchFiles: 1\n")
@@ -245,7 +275,8 @@ SAMPLE_LIST = [("UILayout", "Helix Samples - UI Layout", "UI/UILayout.hxml", (0.
                ("UICollections", "Helix Samples - UI Collections", "UI/UICollections.hxml", (0.11, 0.13, 0.17, 1)),
                ("UIBinding", "Helix Samples - UI Data Binding", "UI/UIBinding.hxml", (0.11, 0.13, 0.17, 1)),
                ("UINodeGraph", "Helix Samples - UI Node Graph", "UI/UINodeGraph.hxml", (0.13, 0.13, 0.13, 1)),
-               ("UIImmediate", "Helix Samples - Immediate GUI", "UI/UIImmediate.hxml", (0.1, 0.11, 0.14, 1))]
+               ("UIImmediate", "Helix Samples - Immediate GUI", "UI/UIImmediate.hxml", (0.1, 0.11, 0.14, 1)),
+               ("UICanvas", "Helix Samples - Canvas UI", None, (0.42, 0.58, 0.78, 1))]
 
 
 def main():

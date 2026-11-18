@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The C# scripts of the UICanvas sample: a HUD, an inventory, settings and a 3D terminal of the canvas UI. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net11.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Message methods are found by reflection, fields set by the scene. -->
+    <NoWarn>IDE0051;CS0169;CS0649</NoWarn>
+    <AssemblyName>HelixSamples.UICanvas</AssemblyName>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HelixEngine.CoreModule">
+      <HintPath>$(HelixCoreModule)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Helix.Mathematics">
+      <HintPath>$([System.IO.Path]::GetDirectoryName($(HelixCoreModule)))/Helix.Mathematics.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Helix.UI.Runtime">
+      <HintPath>$(HelixUIRuntime)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Helix.CanvasUI.Runtime">
+      <HintPath>$(HelixCanvasUIRuntime)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Helix.Scripting.Runtime">
+      <HintPath>$(HelixScriptingRuntime)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
