@@ -267,9 +267,10 @@ namespace SceneDemo
                                                                           ("Spot", LightUnit.Lumen, 30000f) })
             {
                 GameObject go = GameObject.Find(name);
-                if (go == null || go.GetComponent<Light>() == null || go.GetComponent<PhysicalAdditionalLightData>() != null)
+                if (go == null || go.GetComponent<Light>() == null)
                     continue;
-                PhysicalAdditionalLightData data = go.AddComponent<PhysicalAdditionalLightData>();
+                // The editor's companions may have added it already (with the pipeline's defaults).
+                PhysicalAdditionalLightData data = go.GetComponent<PhysicalAdditionalLightData>() ?? go.AddComponent<PhysicalAdditionalLightData>();
                 data.lightUnit = unit;
                 data.intensity = value;
             }
