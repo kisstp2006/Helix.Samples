@@ -44,6 +44,23 @@ for the window's size. The launcher reads the samples' data folders where they a
 once. A sample's C# scripts (`Samples/<name>/Scripts`) are built beside the launcher into `Managed/<name>` with the
 engine's assemblies, the folder the launcher gives the player.
 
+## Editor projects
+
+`Projects/AssetDemo` is a project of the Helix editor (Helix.Editor): its own textures, a pixel art sprite, models and
+palettes (drawn by `Tools/GenerateAssetDemo.py`) and editor scripts (`Projects/AssetDemo/Scripts/AssetDemo.cs`):
+`PaletteImporter`, a scripted importer of `.palette` files (a color a line) into strip textures; `PixelArtPostprocessor`,
+an asset postprocessor that imports the sprites under `Assets/Textures/Pixel/` with point filtering; and the window
+Window > Asset Demo, a tab beside the scene view listing the assets with their main types, importers, previews and
+import hashes. The editor imports the project into its `Library/` (the artifacts the next open loads from).
+
+```
+python Tools/OpenAssetDemo.py <path to HelixEditor.exe>
+python Tools/OpenAssetDemo.py <path to HelixEditor.exe> -pipeline physical -force-glcore
+```
+
+builds the scripts against that editor's assemblies into `Projects/AssetDemo/Library/ScriptAssemblies` (where the
+editor loads a project's script assemblies from) and opens the project; the arguments after the editor's path go to it.
+
 ## Contents
 
 | Path | Content |
@@ -53,6 +70,8 @@ engine's assemblies, the folder the launcher gives the player.
 | `Source/Helix/Samples/Interaction/` | The sample element types of `UIInput` (a button, a text box, drag items and drop lists, a probe and a log of events) |
 | `Source/Helix/Samples/Charts/` | The `SampleChart` element type: charts of the values in its markup, painted by kind from a table |
 | `Samples/<name>/Data/` | Each sample's data folder: its own files, and the settings, scene, script assets, images, their .meta and the index a build would leave (written by `Tools/GenerateData.py`) |
+| `Projects/AssetDemo/` | The editor project above: its assets with their .meta files, its editor scripts and their project file |
+| `Tools/GenerateAssetDemo.py`, `Tools/OpenAssetDemo.py` | Draw the editor project's assets; build its scripts and open it in an editor |
 | `Tools/PrepareImages.py` | Puts the CC0 art into the data folders from the downloaded packs (listed in each sample's `CREDITS.txt`) |
 | `Tests/` | Each sample on each pipeline in batch mode, its screenshot against `Tests/Golden/` (samples drawn with the machine's fonts are compared only off CI) |
 | `Tools/CompareImages/` | The screenshot comparison of the tests |

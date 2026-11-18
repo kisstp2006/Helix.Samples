@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: f6c2e31b83bc4d34a002deba19fd60ba
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  script: AssetDemo.PaletteImporter
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
